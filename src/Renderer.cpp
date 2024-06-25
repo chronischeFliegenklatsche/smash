@@ -1,4 +1,4 @@
-#ifdef _RENDERER_HPP
+
 #include <smash.h>
 
 namespace smash
@@ -63,4 +63,3 @@ namespace smash
         m_Renderer.render(SceneManagement::getActiveScene());
     }
 }
-#endif

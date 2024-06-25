@@ -22,7 +22,7 @@ namespace smash
 
         friend class Input;
         friend class InputAPI;
-        friend class InputDevice;
+        friend class ArduinoInputDevice;
         void setAxis(const std::string& axis, float value);
         void increaseAxis(const std::string& axis, float value);
 

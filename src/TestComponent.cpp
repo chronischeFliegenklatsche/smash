@@ -1,4 +1,4 @@
-#ifdef _TEST_COMPONENT_HPP
+
 #include <smash.h>
 
 #ifdef _WIN32
@@ -28,4 +28,3 @@ namespace smash
         return "TestComponent";
     }
 }
-#endif

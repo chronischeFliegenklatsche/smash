@@ -1,4 +1,4 @@
-#ifdef _COMPONENTS_CONTAINER_HPP
+
 #include <smash.h>
 
 namespace smash
@@ -165,4 +165,3 @@ namespace smash
         return _current != other._current;
     }
 }
-#endif

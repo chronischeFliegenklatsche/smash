@@ -5,15 +5,15 @@
 
 namespace smash
 {
-    class InputDevice;
+    class ArduinoInputDevice;
 
-    class InputDevice
+    class ArduinoInputDevice
     {
     protected:
         void setButtonState(InputSystem& inputSystem, const std::string& button, bool hold) const;  
     public:
-        InputDevice();
-        virtual ~InputDevice();
+        ArduinoInputDevice();
+        virtual ~ArduinoInputDevice();
         
         virtual void provideInputs(InputSystem& inputSystem) const = 0;
     };

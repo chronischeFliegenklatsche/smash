@@ -1,4 +1,4 @@
-#ifdef _ARDUINO_SPEAKER_HPP
+#ifdef ARDUIO
 #include <smash.h>
 
 namespace smash {

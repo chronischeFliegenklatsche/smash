@@ -1,4 +1,4 @@
-#ifdef _INPUT_SYSTEM_HPP
+
 #include <smash.h>
 
 namespace smash
@@ -117,4 +117,3 @@ namespace smash
         m_InputSystem.setKeyState(keyCode, hold);
     }
 }
-#endif

@@ -8,7 +8,7 @@ namespace smash
 {
     class ArduinoButton;
     
-    class ArduinoButton : public InputDevice
+    class ArduinoButton : public ArduinoInputDevice
     {
         std::string m_ButtonName;
         int m_Pin;

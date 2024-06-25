@@ -10,14 +10,14 @@ namespace smash {
     class ArduinoInputAPI;
     class ArduinoInputAPI : public InputAPI
     {
-        std::vector<std::shared_ptr<InputDevice>> m_InputDevices;   
+        std::vector<std::shared_ptr<ArduinoInputDevice>> m_InputDevices;   
     public:
     
         ArduinoInputAPI();
         ~ArduinoInputAPI() override;
 
-        void addInputDevice(std::shared_ptr<InputDevice> inputDevice);
-        bool removeInputDevice(std::shared_ptr<InputDevice> inputDevice);
+        void addInputDevice(std::shared_ptr<ArduinoInputDevice> inputDevice);
+        bool removeInputDevice(std::shared_ptr<ArduinoInputDevice> inputDevice);
 
         void updateInputs(InputSystem& inputSystem) const override;
         void finishFrame() const override;

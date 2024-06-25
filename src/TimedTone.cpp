@@ -1,4 +1,4 @@
-#ifdef _TIMED_TONE_HPP
+
 #include <smash.h>
 
 namespace smash {
@@ -8,4 +8,3 @@ namespace smash {
     TimedTone::TimedTone(float frequency, float duration, float startTime) : Tone(frequency, duration), startTime(startTime) {
     }
 }
-#endif

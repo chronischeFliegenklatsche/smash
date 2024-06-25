@@ -1,4 +1,4 @@
-#ifdef _SHADER_HPP
+
 #include <smash.h>
 
 namespace smash
@@ -9,4 +9,3 @@ namespace smash
     Shader::~Shader()
     {}   
 }
-#endif

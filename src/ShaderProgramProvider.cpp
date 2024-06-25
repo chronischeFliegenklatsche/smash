@@ -1,4 +1,4 @@
-#ifdef _SHADER_PROGRAM_PROVIDER_HPP
+
 #include <smash.h>
 
 namespace smash {
@@ -22,4 +22,3 @@ namespace smash {
     }
 
 }
-#endif

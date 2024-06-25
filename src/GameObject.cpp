@@ -1,9 +1,9 @@
-#ifdef _GAME_OBJECT_HPP
+
 #include <smash.h>
 
 namespace smash
 {
-    GameObject::GameObject() : _components(), _scene(nullptr)
+    GameObject::GameObject() : _scene(nullptr), _components()
     {}
 
     GameObject::~GameObject()
@@ -107,4 +107,3 @@ namespace smash
         return nullptr;
     }
 }
-#endif

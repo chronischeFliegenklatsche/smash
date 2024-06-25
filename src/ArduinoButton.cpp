@@ -1,9 +1,5 @@
-#ifdef _ARDUINO_BUTTON_HPP
-#include <smash.h>
-
 #ifdef ARDUINO
-#include <Arduino.h>
-#endif
+#include <smash.h>
 
 namespace smash {
 
@@ -15,10 +11,7 @@ namespace smash {
     };    
 
     bool ArduinoButton::getState() const {
-#ifdef ARDUINO
         return digitalRead(m_Pin) == HIGH;
-#endif
-        return false;
     };
 
     void ArduinoButton::provideInputs(InputSystem& inputSystem) const {

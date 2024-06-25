@@ -1,4 +1,4 @@
-#ifdef _TRANSFORM_HPP
+
 #include <smash.h>
 
 namespace smash {
@@ -38,4 +38,3 @@ namespace smash {
     }
 
 }
-#endif

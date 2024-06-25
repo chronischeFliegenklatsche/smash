@@ -1,4 +1,4 @@
-#ifdef _RECTANGLE_RENDERER_HPP
+
 #include <smash.h>
 
 namespace smash {
@@ -102,4 +102,3 @@ namespace smash {
         return "RectangleRenderer";
     }
 }
-#endif

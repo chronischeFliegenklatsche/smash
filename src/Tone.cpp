@@ -1,4 +1,4 @@
-#ifdef _TONE_HPP
+
 #include <smash.h>
 
 namespace smash {
@@ -8,4 +8,3 @@ namespace smash {
     Tone::Tone(float frequency, float duration) : frequency(frequency), duration(duration) {
     }
 }
-#endif

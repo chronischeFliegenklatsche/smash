@@ -1,4 +1,4 @@
-#ifdef _RECTANGLE_SHADER_HPP
+
 #include <smash.h>
 
 namespace smash {
@@ -24,4 +24,3 @@ namespace smash {
     }
 
 }
-#endif

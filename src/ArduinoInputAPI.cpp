@@ -1,7 +1,6 @@
-#ifdef _ARDUINO_INPUT_API_HPP
+#ifdef ARDUINO
 #include <smash.h>
 
-#ifdef _ARDUINO_INPUT_API_HPP
 namespace smash {
 
     ArduinoInputAPI::ArduinoInputAPI() {
@@ -10,11 +9,11 @@ namespace smash {
     ArduinoInputAPI::~ArduinoInputAPI() {
     };
 
-    void ArduinoInputAPI::addInputDevice(std::shared_ptr<InputDevice> inputDevice) {
+    void ArduinoInputAPI::addInputDevice(std::shared_ptr<ArduinoInputDevice> inputDevice) {
         m_InputDevices.push_back(inputDevice);
     };
 
-    bool ArduinoInputAPI::removeInputDevice(std::shared_ptr<InputDevice> inputDevice) {
+    bool ArduinoInputAPI::removeInputDevice(std::shared_ptr<ArduinoInputDevice> inputDevice) {
         for (auto it = m_InputDevices.begin(); it != m_InputDevices.end(); ++it) {
             if (*it == inputDevice) {
                 m_InputDevices.erase(it);
@@ -34,5 +33,4 @@ namespace smash {
     };
     
 }
-#endif
 #endif

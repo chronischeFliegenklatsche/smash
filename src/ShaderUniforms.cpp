@@ -1,4 +1,4 @@
-#ifdef _SHADER_UNIFORMS_HPP
+
 #include <smash.h>
 
 namespace smash {
@@ -31,4 +31,3 @@ namespace smash {
     }
 
 }
-#endif

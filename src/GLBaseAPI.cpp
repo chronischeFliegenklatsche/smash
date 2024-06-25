@@ -1,4 +1,4 @@
-#ifdef _GL_BASE_API_HPP
+#ifdef _WIN32
 #include <smash.h>
 
 namespace smash
@@ -18,11 +18,13 @@ namespace smash
     
     void window_close_callback(GLFWwindow* window)
     {
+        (void)window; // mark as unnused
         Application::queueApplicationExit();
     }
 
     void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     {
+        (void)window; // mark as unnused
         // Make sure the window size is not minimized
         if (width > 0 && height > 0)
         {
