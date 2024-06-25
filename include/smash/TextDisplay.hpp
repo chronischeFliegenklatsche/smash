@@ -1,4 +1,3 @@
-
 #ifndef _TEXT_DISPLAY_HPP
 #define _TEXT_DISPLAY_HPP
 

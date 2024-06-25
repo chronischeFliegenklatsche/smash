@@ -1,4 +1,3 @@
-
 #ifndef _VECTOR_2_HPP
 #define _VECTOR_2_HPP
 

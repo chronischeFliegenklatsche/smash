@@ -1,4 +1,3 @@
-
 #ifndef _TONE_HPP
 #define _TONE_HPP
 

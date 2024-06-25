@@ -1,4 +1,3 @@
-
 #ifndef _SPEAKER_TONE_HPP
 #define _SPEAKER_TONE_HPP
 

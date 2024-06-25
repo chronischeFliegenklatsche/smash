@@ -1,4 +1,3 @@
-
 #include "Component.hpp"
 
 namespace smash

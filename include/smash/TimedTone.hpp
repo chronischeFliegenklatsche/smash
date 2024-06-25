@@ -1,4 +1,3 @@
-
 #ifndef _TIMED_TONE_HPP
 #define _TIMED_TONE_HPP
 

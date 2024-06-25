@@ -1,7 +1,7 @@
 #ifndef _BUTTON_HPP
 #define _BUTTON_HPP
 
-#include "InputDevice.hpp"
+#include "ArduinoInputDevice.hpp"
 #include "String.hpp"
 
 namespace smash

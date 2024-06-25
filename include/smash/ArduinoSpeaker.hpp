@@ -1,6 +1,5 @@
-
-#ifndef _SPEAKER_HPP
-#define _SPEAKER_HPP
+#ifndef _ARDUINO_SPEAKER_HPP
+#define _ARDUINO_SPEAKER_HPP
 
 #include "Tone.hpp"
 #include "SpeakerTone.hpp"

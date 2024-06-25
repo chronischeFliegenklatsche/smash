@@ -5,10 +5,8 @@
 #include "smash/Containers.hpp"
 #include "smash/Diagnostics.hpp"
 #include "smash/GameObject.hpp"
-
 #include "smash/InputAPI.hpp"
 #include "smash/InputDetection.hpp"
-#include "smash/InputDevice.hpp"
 #include "smash/InputSystem.hpp"
 #include "smash/Integers.hpp"
 #include "smash/KeyCodes.hpp"
@@ -24,9 +22,6 @@
 #include "smash/ShaderProgramProvider.hpp"
 #include "smash/ShaderUniforms.hpp"
 #include "smash/SmartPointers.hpp"
-#include "smash/Song.hpp"
-#include "smash/Speaker.hpp"
-#include "smash/SpeakerController.hpp"
 #include "smash/SpeakerTone.hpp"
 #include "smash/String.hpp"
 #include "smash/TestComponent.hpp"
@@ -39,12 +34,13 @@
 #include "smash/Transform.hpp"
 #include "smash/RectangleRenderer.hpp"
 #include "smash/RectangleShader.hpp"
-#include "smash/ArduinoInputAPI.hpp"
 #include "smash/Button.hpp"
-#include "smash/RgbMatrixRenderingAPI.hpp"
 
 #ifdef ARDUINO
-
+#include "smash/ArduinoInputDevice.hpp"
+#include "smash/ArduinoInputAPI.hpp"
+#include "smash/RgbMatrixRenderingAPI.hpp"
+#include "smash/ArduinoSpeaker.hpp"
 #endif
 
 #ifdef _WIN32

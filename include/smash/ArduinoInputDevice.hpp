@@ -1,6 +1,5 @@
-
-#ifndef _INPUT_DEVICE_HPP
-#define _INPUT_DEVICE_HPP
+#ifndef _ARDUINO_INPUT_DEVICE_HPP
+#define _ARDUINO_INPUT_DEVICE_HPP
 
 #include "InputSystem.hpp"
 

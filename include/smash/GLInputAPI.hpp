@@ -1,4 +1,3 @@
-#ifdef _WIN32
 #ifndef _GLFW_INPUT_API_HPP
 #define _GLFW_INPUT_API_HPP
 
@@ -23,5 +22,4 @@ namespace smash
     };
 }
 
-#endif
 #endif

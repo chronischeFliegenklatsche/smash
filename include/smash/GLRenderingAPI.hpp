@@ -1,4 +1,3 @@
-#ifdef _WIN32
 #ifndef _GLFW_RENDERING_API_HPP
 #define _GLFW_RENDERING_API_HPP
 
@@ -22,5 +21,4 @@ namespace smash
     };
 }
 
-#endif
 #endif

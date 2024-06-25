@@ -1,4 +1,3 @@
-
 #ifndef _INPUT_DETECTION_HPP
 #define _INPUT_DETECTION_HPP
 

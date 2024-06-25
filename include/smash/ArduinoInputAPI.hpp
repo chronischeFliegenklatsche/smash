@@ -3,7 +3,7 @@
 
 #include "Containers.hpp"
 #include "InputAPI.hpp"
-#include "InputDevice.hpp"
+#include "ArduinoInputDevice.hpp"
 #include "SmartPointers.hpp"
 
 namespace smash {
