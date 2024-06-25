@@ -1,0 +1,32 @@
+#ifndef _SCENE_HPP
+#define _SCENE_HPP
+
+#include "Containers.hpp"
+#include "SmartPointers.hpp"
+#include "ComponentsContainer.hpp"  
+
+namespace smash
+{
+    class Scene;
+
+    class Scene
+    {
+        friend class Renderer;
+        friend class GameObject;
+        ComponentsContainer _components;
+        std::vector<std::shared_ptr<GameObject>> _gameObjects;
+    public:
+    
+        Scene();
+        virtual ~Scene();
+
+        void instantiate(std::shared_ptr<GameObject> gameObject);   
+        bool destroy(std::shared_ptr<GameObject> gameObject);
+
+        virtual void update();
+
+    };
+}
+
+
+#endif
