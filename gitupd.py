@@ -34,6 +34,7 @@ def main():
     # Check if we're inside a git repository
     if not os.path.exists(".git"):
         print("This script must be run from the root of a git repository.")
+        print("Please navigate to the root directory of your Git repository and run the script again.")
         sys.exit(1)
 
     # Get current branch
@@ -61,5 +62,5 @@ def main():
         print("Local repository is up to date.")
 
 if __name__ == "__main__":
-    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
+    os.chdir(os.path.dirname(os.path.abspath(__file__)))
     main()
