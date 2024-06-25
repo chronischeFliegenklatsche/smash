@@ -14,14 +14,14 @@ def get_remote_url():
 
 def get_local_refs():
     output, _, _ = run_command("git show-ref")
-    return output
+    return set(line.split()[0] for line in output.splitlines() if not line.endswith('/HEAD'))
 
 def get_remote_refs(remote_url):
     output, _, _ = run_command(f"git ls-remote {remote_url}")
-    return output
+    return set(line.split()[0] for line in output.splitlines() if not line.endswith('/HEAD'))
 
-def clone_repository(remote_url, temp_dir):
-    _, _, return_code = run_command(f"git clone {remote_url} {temp_dir}")
+def pull_repository():
+    _, _, return_code = run_command("git pull")
     return return_code == 0
 
 def main():
@@ -55,23 +55,11 @@ def main():
 
     print("Remote repository has changes. Updating local repository...")
 
-    # Create a temporary directory for cloning
-    with tempfile.TemporaryDirectory() as temp_dir:
-        # Clone the repository to the temporary directory
-        if not clone_repository(remote_url, temp_dir):
-            print("Error: Failed to clone the repository.")
-            return
-
-        # Copy the contents of the temp directory to the current directory
-        for item in os.listdir(temp_dir):
-            s = os.path.join(temp_dir, item)
-            d = os.path.join(repo_root, item)
-            if os.path.isdir(s):
-                shutil.copytree(s, d, dirs_exist_ok=True)
-            else:
-                shutil.copy2(s, d)
-
-    print("Repository has been successfully updated.")
+    # Pull the latest changes
+    if pull_repository():
+        print("Repository has been successfully updated.")
+    else:
+        print("Error: Failed to update the repository.")
 
 if __name__ == "__main__":
     main()
