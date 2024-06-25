@@ -16,7 +16,7 @@
 #include "smash/RenderingAPI.hpp"
 #include "smash/Runtime.hpp"
 #include "smash/Scene.hpp"
-#include "smash/SceneManager.hpp"
+#include "smash/SceneManagement.hpp"
 #include "smash/Shader.hpp"
 #include "smash/ShaderAttributes.hpp"
 #include "smash/ShaderProgram.hpp"
