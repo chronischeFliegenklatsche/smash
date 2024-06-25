@@ -34,6 +34,7 @@
 #include "smash/Transform.hpp"
 #include "smash/RectangleRenderer.hpp"
 #include "smash/RectangleShader.hpp"
+#include "smash/Lifetime.hpp"
 
 // For embedded platforms such as Arduino and ESP32
 #ifdef ARDUINO
