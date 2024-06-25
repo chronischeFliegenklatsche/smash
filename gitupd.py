@@ -1,59 +1,70 @@
 import os
 import subprocess
+import shutil
+import tempfile
 
 def run_command(command):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     output, error = process.communicate()
-    return output.decode('utf-8').strip(), error.decode('utf-8').strip()
+    return output.decode('utf-8').strip(), error.decode('utf-8').strip(), process.returncode
 
-def clone_if_newer():
-    current_dir = os.getcwd()
+def get_remote_url():
+    output, _, _ = run_command("git config --get remote.origin.url")
+    return output
+
+def get_local_commit():
+    output, _, _ = run_command("git rev-parse HEAD")
+    return output
+
+def get_remote_commit(remote_url):
+    output, _, _ = run_command(f"git ls-remote {remote_url} HEAD")
+    return output.split()[0] if output else None
+
+def clone_repository(remote_url, temp_dir):
+    _, _, return_code = run_command(f"git clone {remote_url} {temp_dir}")
+    return return_code == 0
+
+def main():
+    # Get the current working directory (repository root)
+    repo_root = os.getcwd()
     
-    try:
-        # Fetch the latest changes from the remote
-        _, error = run_command("git fetch")
-        if error:
-            print(f"Error fetching from remote: {error}")
+    # Get the remote URL
+    remote_url = get_remote_url()
+    if not remote_url:
+        print("Error: Unable to get remote URL. Make sure you're in a git repository.")
+        return
+
+    # Get the local and remote commit hashes
+    local_commit = get_local_commit()
+    remote_commit = get_remote_commit(remote_url)
+
+    if not remote_commit:
+        print("Error: Unable to fetch remote commit hash.")
+        return
+
+    if local_commit == remote_commit:
+        print("Local repository is up to date.")
+        return
+
+    print("Remote repository is newer. Cloning...")
+
+    # Create a temporary directory for cloning
+    with tempfile.TemporaryDirectory() as temp_dir:
+        # Clone the repository to the temporary directory
+        if not clone_repository(remote_url, temp_dir):
+            print("Error: Failed to clone the repository.")
             return
 
-        # Get the name of the current branch
-        branch, error = run_command("git rev-parse --abbrev-ref HEAD")
-        if error:
-            print(f"Error getting current branch: {error}")
-            return
+        # Copy the contents of the temp directory to the current directory
+        for item in os.listdir(temp_dir):
+            s = os.path.join(temp_dir, item)
+            d = os.path.join(repo_root, item)
+            if os.path.isdir(s):
+                shutil.copytree(s, d, dirs_exist_ok=True)
+            else:
+                shutil.copy2(s, d)
 
-        # Check if there are any differences between local and remote
-        diff, error = run_command(f"git diff HEAD origin/{branch}")
-        if error:
-            print(f"Error checking for differences: {error}")
-            return
-
-        if diff:
-            print("Remote repository has changes. Cloning...")
-            
-            # Get the remote URL
-            remote_url, error = run_command("git config --get remote.origin.url")
-            if error:
-                print(f"Error getting remote URL: {error}")
-                return
-
-            # Move up one directory
-            os.chdir('..')
-            
-            # Clone the repository
-            new_dir = os.path.basename(current_dir) + '_new'
-            output, error = run_command(f"git clone {remote_url} {new_dir}")
-            if error:
-                print(f"Error cloning repository: {error}")
-                return
-
-            print(f"Repository cloned to {new_dir}")
-            print("Please review the new clone and replace the old directory if desired.")
-        else:
-            print("Local repository is up to date. No action needed.")
-
-    except Exception as e:
-        print(f"An error occurred: {str(e)}")
+    print("Repository has been successfully updated.")
 
 if __name__ == "__main__":
-    clone_if_newer()
+    main()
