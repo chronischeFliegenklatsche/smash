@@ -1,45 +1,64 @@
+import os
 import subprocess
+import sys
 
 def run_command(command):
-    process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-    output, error = process.communicate()
-    return output.decode('utf-8').strip(), error.decode('utf-8').strip(), process.returncode
+    try:
+        result = subprocess.run(command, check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        return result.stdout.strip()
+    except subprocess.CalledProcessError as e:
+        print(f"Error executing command: {e}")
+        print(f"Error output: {e.stderr}")
+        sys.exit(1)
 
-def check_and_update_repo():
+def get_current_branch():
+    return run_command(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+
+def is_repo_clean():
+    status = run_command(["git", "status", "--porcelain"])
+    return len(status) == 0
+
+def fetch_remote():
+    run_command(["git", "fetch", "origin"])
+
+def get_local_commit():
+    return run_command(["git", "rev-parse", "HEAD"])
+
+def get_remote_commit(branch):
+    return run_command(["git", "rev-parse", f"origin/{branch}"])
+
+def pull_changes():
+    run_command(["git", "pull", "origin"])
+
+def main():
+    # Check if we're inside a git repository
+    if not os.path.exists(".git"):
+        print("This script must be run from the root of a git repository.")
+        sys.exit(1)
+
+    # Get current branch
+    current_branch = get_current_branch()
+
+    # Check if the repository is clean
+    if not is_repo_clean():
+        print("The repository has uncommitted changes. Please commit or stash them before running this script.")
+        sys.exit(1)
+
+    # Fetch the latest changes from remote
     print("Fetching latest changes from remote...")
-    fetch_output, fetch_error, fetch_return_code = run_command("git fetch")
-    if fetch_return_code != 0:
-        print("Error: Failed to fetch from remote.")
-        print(fetch_error)
-        return
+    fetch_remote()
 
-    print("Checking for updates...")
-    local_hash, local_error, local_return_code = run_command("git rev-parse HEAD")
-    if local_return_code != 0:
-        print("Error: Failed to get local HEAD.")
-        print(local_error)
-        return
+    # Get local and remote commit hashes
+    local_commit = get_local_commit()
+    remote_commit = get_remote_commit(current_branch)
 
-    remote_hash, remote_error, remote_return_code = run_command("git rev-parse @{u}")
-    if remote_return_code != 0:
-        print("Error: Failed to get remote HEAD.")
-        print(remote_error)
-        return
-
-    print(f"Local HEAD: {local_hash}")
-    print(f"Remote HEAD: {remote_hash}")
-
-    if local_hash != remote_hash:
-        print("Updates available. Pulling changes...")
-        pull_output, pull_error, pull_return_code = run_command("git pull")
-        if pull_return_code == 0:
-            print("Successfully updated the repository.")
-            print(pull_output)
-        else:
-            print("Error occurred while pulling changes:")
-            print(pull_error)
+    # Compare local and remote commits
+    if local_commit != remote_commit:
+        print(f"Remote version is newer. Pulling changes for branch '{current_branch}'...")
+        pull_changes()
+        print("Repository updated successfully.")
     else:
         print("Local repository is up to date.")
 
 if __name__ == "__main__":
-    check_and_update_repo()
+    main()
