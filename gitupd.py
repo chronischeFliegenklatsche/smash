@@ -61,4 +61,5 @@ def main():
         print("Local repository is up to date.")
 
 if __name__ == "__main__":
+    ROOT_DIR = os.path.dirname(os.path.abspath(__file__))
     main()
