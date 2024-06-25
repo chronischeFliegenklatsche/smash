@@ -12,13 +12,13 @@ def get_remote_url():
     output, _, _ = run_command("git config --get remote.origin.url")
     return output
 
-def get_local_commit():
-    output, _, _ = run_command("git rev-parse HEAD")
+def get_local_refs():
+    output, _, _ = run_command("git show-ref")
     return output
 
-def get_remote_commit(remote_url):
-    output, _, _ = run_command(f"git ls-remote {remote_url} HEAD")
-    return output.split()[0] if output else None
+def get_remote_refs(remote_url):
+    output, _, _ = run_command(f"git ls-remote {remote_url}")
+    return output
 
 def clone_repository(remote_url, temp_dir):
     _, _, return_code = run_command(f"git clone {remote_url} {temp_dir}")
@@ -34,19 +34,26 @@ def main():
         print("Error: Unable to get remote URL. Make sure you're in a git repository.")
         return
 
-    # Get the local and remote commit hashes
-    local_commit = get_local_commit()
-    remote_commit = get_remote_commit(remote_url)
+    print(f"Remote URL: {remote_url}")
 
-    if not remote_commit:
-        print("Error: Unable to fetch remote commit hash.")
-        return
+    # Fetch the latest changes from remote
+    print("Fetching latest changes from remote...")
+    run_command("git fetch")
 
-    if local_commit == remote_commit:
+    # Get the local and remote refs
+    local_refs = get_local_refs()
+    remote_refs = get_remote_refs(remote_url)
+
+    print("Local refs:")
+    print(local_refs)
+    print("\nRemote refs:")
+    print(remote_refs)
+
+    if local_refs == remote_refs:
         print("Local repository is up to date.")
         return
 
-    print("Remote repository is newer. Cloning...")
+    print("Remote repository has changes. Updating local repository...")
 
     # Create a temporary directory for cloning
     with tempfile.TemporaryDirectory() as temp_dir:
