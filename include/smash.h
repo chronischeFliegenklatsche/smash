@@ -1,5 +1,3 @@
-#ifndef _SMASH_H
-#define _SMASH_H
 #include "smash/BehaviourScript.hpp"
 #include "smash/Color.hpp"
 #include "smash/Component.hpp"
@@ -7,9 +5,7 @@
 #include "smash/Containers.hpp"
 #include "smash/Diagnostics.hpp"
 #include "smash/GameObject.hpp"
-#include "smash/GLBaseAPI.hpp"
-#include "smash/GLInputAPI.hpp"
-#include "smash/GLRenderingAPI.hpp"
+
 #include "smash/InputAPI.hpp"
 #include "smash/InputDetection.hpp"
 #include "smash/InputDevice.hpp"
@@ -46,6 +42,15 @@
 #include "smash/ArduinoInputAPI.hpp"
 #include "smash/Button.hpp"
 #include "smash/RgbMatrixRenderingAPI.hpp"
+
+#ifdef ARDUINO
+
+#endif
+
+#ifdef _WIN32
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
+#include "smash/GLBaseAPI.hpp"
+#include "smash/GLInputAPI.hpp"
+#include "smash/GLRenderingAPI.hpp"
 #endif
