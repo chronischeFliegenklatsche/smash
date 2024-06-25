@@ -1,3 +1,4 @@
+// For all platforms
 #include "smash/BehaviourScript.hpp"
 #include "smash/Color.hpp"
 #include "smash/Component.hpp"
@@ -22,7 +23,6 @@
 #include "smash/ShaderProgramProvider.hpp"
 #include "smash/ShaderUniforms.hpp"
 #include "smash/SmartPointers.hpp"
-#include "smash/SpeakerTone.hpp"
 #include "smash/String.hpp"
 #include "smash/TestComponent.hpp"
 #include "smash/TextDisplay.hpp"
@@ -34,15 +34,18 @@
 #include "smash/Transform.hpp"
 #include "smash/RectangleRenderer.hpp"
 #include "smash/RectangleShader.hpp"
-#include "smash/Button.hpp"
 
+// For embedded platforms such as Arduino and ESP32
 #ifdef ARDUINO
+#include "smash/ArduinoSpeakerTone.hpp"
 #include "smash/ArduinoInputDevice.hpp"
 #include "smash/ArduinoInputAPI.hpp"
 #include "smash/RgbMatrixRenderingAPI.hpp"
 #include "smash/ArduinoSpeaker.hpp"
+#include "smash/ArduinoButton.hpp"
 #endif
 
+// For windows platform
 #ifdef _WIN32
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>

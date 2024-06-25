@@ -1,5 +1,5 @@
-#ifndef _TEXT_DISPLAY_HPP
-#define _TEXT_DISPLAY_HPP
+#ifndef _ARDUINO_TEXT_DISPLAY_HPP
+#define _ARDUINO_TEXT_DISPLAY_HPP
 
 #include "Integers.hpp"
 

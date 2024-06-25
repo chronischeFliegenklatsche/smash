@@ -1,3 +1,4 @@
+#ifdef _GAME_OBJECT_HPP
 #include <smash.h>
 
 namespace smash
@@ -106,3 +107,4 @@ namespace smash
         return nullptr;
     }
 }
+#endif

@@ -1,5 +1,5 @@
-#ifndef _SCENE_MANAGER_HPP
-#define _SCENE_MANAGER_HPP
+#ifndef _SCENE_MANAGEMENT_HPP
+#define _SCENE_MANAGEMENT_HPP
 
 #include "Containers.hpp"
 #include "SmartPointers.hpp"

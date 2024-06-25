@@ -1,3 +1,4 @@
+#ifdef _BEHAVIOUR_SCRIPT_HPP
 #include <smash.h>
 
 namespace smash {
@@ -39,3 +40,4 @@ namespace smash {
         return getGameObject()->getComponent(typeName);
     }
 }
+#endif

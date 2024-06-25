@@ -1,3 +1,4 @@
+#ifdef _INPUT_DETECTION_HPP
 #include <smash.h>
 
 namespace smash
@@ -51,3 +52,4 @@ namespace smash
         m_InputDetector.updateInputs(Input::m_InputSystem);
     }
 }
+#endif

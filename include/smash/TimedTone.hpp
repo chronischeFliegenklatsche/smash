@@ -9,9 +9,10 @@ namespace smash {
     
     struct TimedTone : public Tone{
         
+        float startTime;
         TimedTone();
         TimedTone(float frequency, float duration, float startTime);
-        float startTime;
+
     };
 }   
 

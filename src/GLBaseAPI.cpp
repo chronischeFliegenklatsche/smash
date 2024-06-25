@@ -1,4 +1,4 @@
-#ifdef _WIN32
+#ifdef _GL_BASE_API_HPP
 #include <smash.h>
 
 namespace smash

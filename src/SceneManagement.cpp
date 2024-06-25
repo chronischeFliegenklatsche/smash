@@ -1,3 +1,4 @@
+#ifdef _SCENE_MANAGEMENT_HPP
 #include <smash.h>
 
 namespace smash
@@ -119,3 +120,4 @@ namespace smash
         return m_SceneManager[index];
     }
 }
+#endif

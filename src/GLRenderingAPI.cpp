@@ -1,4 +1,4 @@
-#ifdef _WIN32
+#ifdef _GL_RENDERING_API_HPP
 #include <smash.h>
 
 // Vertex shader source code

@@ -1,6 +1,7 @@
-
+#ifdef _ARDUINO_INPUT_API_HPP
 #include <smash.h>
 
+#ifdef _ARDUINO_INPUT_API_HPP
 namespace smash {
 
     ArduinoInputAPI::ArduinoInputAPI() {
@@ -33,3 +34,5 @@ namespace smash {
     };
     
 }
+#endif
+#endif

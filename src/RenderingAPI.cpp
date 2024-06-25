@@ -1,3 +1,4 @@
+#ifdef _RENDERING_API_HPP
 #include <smash.h>
 
 namespace smash
@@ -12,3 +13,4 @@ namespace smash
     }
 
 }
+#endif

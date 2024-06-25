@@ -7,12 +7,10 @@ namespace smash {
 
     struct Tone {
  
-        Tone();
-        Tone(float frequency, float duration);
-
         float frequency; /**< The frequency of the tone. */
         float duration; /**< The duration of the tone. */
-        
+        Tone();
+        Tone(float frequency, float duration);
     };
 } 
 

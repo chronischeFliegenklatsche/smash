@@ -1,3 +1,4 @@
+#ifdef _INPUT_DEVICE_HPP
 #include <smash.h>
 
 namespace smash
@@ -11,4 +12,4 @@ namespace smash
         inputSystem.setButtonState(button, hold);
     }
 }
-
+#endif

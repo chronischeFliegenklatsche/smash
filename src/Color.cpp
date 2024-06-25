@@ -1,3 +1,4 @@
+#ifdef _COLOR_HPP
 #include <smash.h>
 
 namespace smash
@@ -28,3 +29,4 @@ namespace smash
         return (red << 11) | (green << 5) | blue;
     }
 }
+#endif

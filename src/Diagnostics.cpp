@@ -1,3 +1,4 @@
+#ifdef _DIAGNOSTICS_HPP
 #include <smash.h>
 
 #ifdef _WIN32
@@ -106,4 +107,4 @@ fail:
         _diagnoser.memoryTest(componentsCount);
     }
 }
-
+#endif

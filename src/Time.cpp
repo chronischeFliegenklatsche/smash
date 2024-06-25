@@ -1,3 +1,4 @@
+#ifdef _TIME_HPP
 #include <smash.h>
 
 #ifdef _WIN32
@@ -48,3 +49,4 @@ double Time::getNowTime() {
         s_TimeSystem.m_DeltaTime = getNowTime() - s_TimeSystem.m_FrameBeginTime;
     }
 }
+#endif

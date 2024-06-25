@@ -1,14 +1,14 @@
-#ifndef _BUTTON_HPP
-#define _BUTTON_HPP
+#ifndef _ARDUINO_BUTTON_HPP
+#define _ARDUINO_BUTTON_HPP
 
 #include "ArduinoInputDevice.hpp"
 #include "String.hpp"
 
 namespace smash
 {
-    class Button;
+    class ArduinoButton;
     
-    class Button : public InputDevice
+    class ArduinoButton : public InputDevice
     {
         std::string m_ButtonName;
         int m_Pin;
@@ -16,8 +16,8 @@ namespace smash
         bool getState() const;
     public:
 
-        Button();
-        Button(int pin, const std::string& buttonName);
+        ArduinoButton();
+        ArduinoButton(int pin, const std::string& buttonName);
         
         void provideInputs(InputSystem& inputSystem) const override;
     };
