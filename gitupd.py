@@ -1,5 +1,4 @@
 import subprocess
-import sys
 
 def run_command(command):
     process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
@@ -8,24 +7,37 @@ def run_command(command):
 
 def check_and_update_repo():
     print("Fetching latest changes from remote...")
-    _, _, return_code = run_command("git fetch")
-    if return_code != 0:
+    fetch_output, fetch_error, fetch_return_code = run_command("git fetch")
+    if fetch_return_code != 0:
         print("Error: Failed to fetch from remote.")
+        print(fetch_error)
         return
 
     print("Checking for updates...")
-    local_hash, _, _ = run_command("git rev-parse HEAD")
-    remote_hash, _, _ = run_command("git rev-parse @{u}")
+    local_hash, local_error, local_return_code = run_command("git rev-parse HEAD")
+    if local_return_code != 0:
+        print("Error: Failed to get local HEAD.")
+        print(local_error)
+        return
+
+    remote_hash, remote_error, remote_return_code = run_command("git rev-parse @{u}")
+    if remote_return_code != 0:
+        print("Error: Failed to get remote HEAD.")
+        print(remote_error)
+        return
+
+    print(f"Local HEAD: {local_hash}")
+    print(f"Remote HEAD: {remote_hash}")
 
     if local_hash != remote_hash:
         print("Updates available. Pulling changes...")
-        output, error, return_code = run_command("git pull")
-        if return_code == 0:
+        pull_output, pull_error, pull_return_code = run_command("git pull")
+        if pull_return_code == 0:
             print("Successfully updated the repository.")
-            print(output)
+            print(pull_output)
         else:
             print("Error occurred while pulling changes:")
-            print(error)
+            print(pull_error)
     else:
         print("Local repository is up to date.")
 
