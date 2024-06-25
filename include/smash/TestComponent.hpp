@@ -1,3 +1,5 @@
+#ifndef _TEST_COMPONENT_HPP
+#define _TEST_COMPONENT_HPP
 #include "Component.hpp"
 
 namespace smash
@@ -13,3 +15,4 @@ namespace smash
         std::string getTypeName() const override;
     };
 }
+#endif
