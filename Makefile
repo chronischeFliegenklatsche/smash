@@ -3,8 +3,9 @@ CC = gcc
 CXX = g++
 
 # Compiler flags
-CFLAGS = -Wall -Iinclude -IC:/smash/include
+CFLAGS = -Wall -fPIC -Iinclude -IC:/smash/include
 CXXFLAGS := $(CFLAGS)
+DYNAMICFLAGS = -lopengl32 -lgdi32
 
 # Input directories
 SRC_DIR = src
@@ -51,8 +52,19 @@ $(STATIC): $(OBJS) $(LIBDEPS)
 	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
 	ar rcs $(STATIC) $(OBJS) $(LIBDEPS)
 
+# Make dynamic library
+$(DYNAMIC): $(DLL)
+$(DLL): $(OBJS) $(LIBDEPS)
+	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
+	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
+	$(CXX) -shared -o $(DLL) $(OBJS) $(LIBDEPS) $(DYNAMICFLAGS) -Wl,--out-implib,$(DYNAMIC)
+
+# Make resolved names
+static: $(STATIC)
+dynamic: $(DYNAMIC)
+
 # Make all
-all: $(STATIC)
+all: static dynamic
 
 # Make clean
 clean:

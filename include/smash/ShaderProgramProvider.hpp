@@ -12,7 +12,7 @@ namespace smash
 
     class ShaderProgramProvider
     {
-        constexpr static const char* s_ShaderProgramProverTypes[] = { "RectangleRenderer" };
+        static const char* const s_ShaderProgramProviderTypes[];
 
     public:
 

@@ -3,6 +3,8 @@
 
 namespace smash {
 
+    const char* const ShaderProgramProvider::s_ShaderProgramProviderTypes[] { "RectangleRenderer" };
+
     ShaderProgramProvider::ShaderProgramProvider()
     {}
 
@@ -11,7 +13,7 @@ namespace smash {
 
     bool ShaderProgramProvider::hasShaderProgram(TypeNameProvider* object)
     {
-        for (const char* type : s_ShaderProgramProverTypes)
+        for (const char* type : s_ShaderProgramProviderTypes)
         {
             if (std::string(type) == object->getTypeName())
             {
