@@ -51,6 +51,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 $(STATIC): $(OBJS) $(LIBDEPS)
 	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
 	ar rcs $(STATIC) $(OBJS) $(LIBDEPS)
+	@echo Static library created.
 
 # Make dynamic library
 $(DYNAMIC): $(DLL)
@@ -58,16 +59,21 @@ $(DLL): $(OBJS) $(LIBDEPS)
 	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
 	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
 	$(CXX) -shared -o $(DLL) $(OBJS) $(LIBDEPS) $(DYNAMICFLAGS) -Wl,--out-implib,$(DYNAMIC)
+	@echo Dynamic library created.
+
+# Make default
+.DEFAULT_GOAL := all
+
+# Make all
+all: $(STATIC) $(DYNAMIC)
 
 # Make resolved names
 static: $(STATIC)
 dynamic: $(DYNAMIC)
-
-# Make all
-all: static dynamic
 
 # Make clean
 clean:
 	@if exist $(OBJ_DIR) rmdir /s /q $(OBJ_DIR)
 	@if exist $(LIB_DIR) rmdir /s /q $(LIB_DIR)
 	@if exist $(BIN_DIR) rmdir /s /q $(BIN_DIR)
+	@echo Cleaned up.
