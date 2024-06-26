@@ -1,44 +1,61 @@
-CXX := g++
-CC := gcc
-CXXFLAGS := -std=c++17 -Wall -Wextra -O2 -I./include
-CFLAGS := -Wall -Wextra -O2 -I./include
-LDFLAGS := -L./libraries -lglfw3 -lopengl32 -lgdi32
+# Compiler configuration
+CC = gcc
+CXX = g++
 
-SRC_DIR := src
-OBJ_DIR := obj
-BIN_DIR := bin
-LIB_DIR := lib
+# Compiler flags
+CFLAGS = -Wall -Iinclude -IC:/smash/include
+CXXFLAGS := $(CFLAGS)
 
-CPP_SRCS := $(wildcard $(SRC_DIR)/*.cpp)
-C_SRCS := $(wildcard $(SRC_DIR)/*.c)
-CPP_OBJS := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(CPP_SRCS))
-C_OBJS := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(C_SRCS))
-OBJS := $(CPP_OBJS) $(C_OBJS)
+# Input directories
+SRC_DIR = src
+LIBDEP_DIR = libdeps
 
-TARGET := libsmash.dll
-LIB_TARGET := libsmash.a
+# Output directories
+OBJ_DIR = obj
+LIB_DIR = lib
+BIN_DIR = bin
 
-.PHONY: all clean
+# Output names
+STATIC_LIB = libsmash.a
+DYNAMIC_LIB = libsmashdll.a
+DYNAMIC_BIN = smash.dll
 
-all: $(BIN_DIR)/$(TARGET) $(LIB_DIR)/$(LIB_TARGET)
+# Collect source files
+CC_SRCS := $(wildcard $(SRC_DIR)/*.c)
+CXX_SRCS := $(wildcard $(SRC_DIR)/*.cpp)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@if not exist $(OBJ_DIR) mkdir $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+# Collect object files
+OBJS := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(CC_SRCS)) \
+        $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(CXX_SRCS))
 
+# Collect library dependencies
+LIBDEPS := $(wildcard $(LIBDEP_DIR)/*.a)
+
+# Determine static library
+STATIC := $(LIB_DIR)/$(STATIC_LIB)
+DYNAMIC := $(LIB_DIR)/$(DYNAMIC_LIB)
+DLL := $(BIN_DIR)/$(DYNAMIC_BIN)
+
+# Compile c files
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@if not exist $(OBJ_DIR) mkdir $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(BIN_DIR)/$(TARGET): $(OBJS)
-	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
-	$(CXX) -shared -o $@ $^ $(LDFLAGS)
+# Compile cpp files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@if not exist $(OBJ_DIR) mkdir $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(LIB_DIR)/$(LIB_TARGET): $(OBJS)
+# Make static library
+$(STATIC): $(OBJS) $(LIBDEPS)
 	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
-	ar rcs $@ $^
+	ar rcs $(STATIC) $(OBJS) $(LIBDEPS)
 
+# Make all
+all: $(STATIC)
+
+# Make clean
 clean:
 	@if exist $(OBJ_DIR) rmdir /s /q $(OBJ_DIR)
-	@if exist $(BIN_DIR) rmdir /s /q $(BIN_DIR)
 	@if exist $(LIB_DIR) rmdir /s /q $(LIB_DIR)
+	@if exist $(BIN_DIR) rmdir /s /q $(BIN_DIR)
