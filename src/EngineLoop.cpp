@@ -3,7 +3,7 @@
 
 namespace smash
 {
-    void _SMASH_ENGINE_LIFETIME(Runtime& runtime)
+    void _SMASH_ENGINE_LOOP(Runtime& runtime)
     {
         while (!runtime.getRuntimeExitQueued())
         {
