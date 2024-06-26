@@ -5,7 +5,7 @@ CXX = g++
 # Compiler flags
 CFLAGS = -Wall -fPIC -Iinclude -IC:/smash/include
 CXXFLAGS := $(CFLAGS)
-DYNAMICFLAGS = -lopengl32 -lgdi32
+LINKFLAGS = -lopengl32 -lgdi32
 
 # Input directories
 SRC_DIR = src
@@ -50,7 +50,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 # Make static library
 $(STATIC): $(OBJS) $(LIBDEPS)
 	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
-	ar rcs $(STATIC) $(OBJS) $(LIBDEPS)
+	ar rcs $(STATIC) $(OBJS) $(LIBDEPS) $(LINKFLAGS)
 	@echo Static library created.
 
 # Make dynamic library
@@ -58,7 +58,7 @@ $(DYNAMIC): $(DLL)
 $(DLL): $(OBJS) $(LIBDEPS)
 	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
 	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
-	$(CXX) -shared -o $(DLL) $(OBJS) $(LIBDEPS) $(DYNAMICFLAGS) -Wl,--out-implib,$(DYNAMIC)
+	$(CXX) -shared -o $(DLL) $(OBJS) $(LIBDEPS) $(LINKFLAGS) -Wl,--out-implib,$(DYNAMIC)
 	@echo Dynamic library created.
 
 # Make default
