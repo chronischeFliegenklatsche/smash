@@ -10,6 +10,7 @@ namespace smash
     class RgbMatrixRenderingAPI : public RenderingAPI
     {
         mutable MatrixPanel_I2S_DMA m_Matrix;
+        HUB75_I2S_CFG ensureDoubleBuff(HUB75_I2S_CFG config);
     public:
         RgbMatrixRenderingAPI(HUB75_I2S_CFG mxconfig);
         ~RgbMatrixRenderingAPI() override;

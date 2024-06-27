@@ -3,9 +3,8 @@
 
 namespace smash
 {
-    RgbMatrixRenderingAPI::RgbMatrixRenderingAPI(HUB75_I2S_CFG mxconfig) : m_Matrix(mxconfig)
+    RgbMatrixRenderingAPI::RgbMatrixRenderingAPI(HUB75_I2S_CFG mxconfig) : m_Matrix(ensureDoubleBuff(mxconfig))
     {
-        mxconfig.double_buff = true;
         m_Matrix.begin();
     }
 
@@ -23,6 +22,13 @@ namespace smash
         m_Matrix.flipDMABuffer();
         m_Matrix.clearScreen();
     }
+
+    HUB75_I2S_CFG RgbMatrixRenderingAPI::ensureDoubleBuff(HUB75_I2S_CFG config)
+    {
+        config.double_buff = true;
+        return config;
+    }
+
 }
 
 #endif

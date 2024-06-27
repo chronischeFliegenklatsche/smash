@@ -13,9 +13,12 @@ namespace smash
 {
     Diagnoser::Diagnoser()
     {
-#ifdef ARDUINO
+#ifdef ESP32
+        Serial.begin(115200);   
+#elif ARDUINO
         Serial.begin(9600);
 #endif
+        
     }
 
     void Diagnoser::print(std::string text)
