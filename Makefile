@@ -5,15 +5,19 @@ CXX = g++
 # Compiler flags
 CFLAGS = -Wall -fPIC -Iinclude -IC:/smash/include
 CXXFLAGS := $(CFLAGS)
-LINKFLAGS = -lopengl32 -lgdi32
+LDFLAGS = -lopengl32 -lgdi32
 
 # Input directories
 SRC_DIR = src
-LIBDEP_DIR = libdeps
+DEP_DIR = depends
+DEP_STATIC_DIR := $(DEP_DIR)/static
+DEP_DYNAMIC_DIR := $(DEP_DIR)/dynamic
 
 # Output directories
 OBJ_DIR = obj
 LIB_DIR = lib
+LIB_STATIC_DIR := $(LIB_DIR)/static
+LIB_DYNAMIC_DIR := $(LIB_DIR)/dynamic
 BIN_DIR = bin
 
 # Output names
@@ -30,11 +34,12 @@ OBJS := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(CC_SRCS)) \
         $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(CXX_SRCS))
 
 # Collect library dependencies
-LIBDEPS := $(wildcard $(LIBDEP_DIR)/*.a)
+DEPS_STATIC := $(wildcard $(DEP_STATIC_DIR)/*.a)
+DEPS_DYNAMIC := $(wildcard $(DEP_DYNAMIC_DIR)/*.a)
 
 # Determine static library
-STATIC := $(LIB_DIR)/$(STATIC_LIB)
-DYNAMIC := $(LIB_DIR)/$(DYNAMIC_LIB)
+STATIC := $(LIB_STATIC_DIR)/$(STATIC_LIB)
+DYNAMIC := $(LIB_DYNAMIC_DIR)/$(DYNAMIC_LIB)
 DLL := $(BIN_DIR)/$(DYNAMIC_BIN)
 
 # Compile c files
@@ -48,17 +53,17 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 # Make static library
-$(STATIC): $(OBJS) $(LIBDEPS)
-	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
-	ar rcs $(STATIC) $(OBJS) $(LIBDEPS) $(LINKFLAGS)
+$(STATIC): $(OBJS) $(DEPS_STATIC)
+	@if not exist "$(LIB_STATIC_DIR)" mkdir "$(LIB_STATIC_DIR)"
+	ar rcs $(STATIC) $(OBJS) $(DEPS_STATIC)
 	@echo Static library created.
 
 # Make dynamic library
 $(DYNAMIC): $(DLL)
-$(DLL): $(OBJS) $(LIBDEPS)
-	@if not exist $(LIB_DIR) mkdir $(LIB_DIR)
+$(DLL): $(OBJS) $(DEPS_DYNAMIC)
+	@if not exist "$(LIB_DYNAMIC_DIR)" mkdir "$(LIB_DYNAMIC_DIR)"
 	@if not exist $(BIN_DIR) mkdir $(BIN_DIR)
-	$(CXX) -shared -o $(DLL) $(OBJS) $(LIBDEPS) $(LINKFLAGS) -Wl,--out-implib,$(DYNAMIC)
+	$(CXX) -shared -o $(DLL) $(OBJS) $(DEPS_STATIC) $(LDFLAGS) -Wl,--out-implib,$(DYNAMIC)
 	@echo Dynamic library created.
 
 # Make default
