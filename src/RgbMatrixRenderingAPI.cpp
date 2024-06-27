@@ -3,26 +3,25 @@
 
 namespace smash
 {
-
-    RgbMatrixRenderingAPI::RgbMatrixRenderingAPI(RgbMatrixPinConfiguration cfg)
-    : m_Matrix(cfg.width, cfg.bitDepth, 6, cfg.rgbPins, 4, cfg.addrPins, cfg.clk, cfg.lat, cfg.oe, true)
+    RgbMatrixRenderingAPI::RgbMatrixRenderingAPI(HUB75_I2S_CFG mxconfig) : m_Matrix(mxconfig)
     {
-        if (!m_Matrix.begin()) {
-            Diagnostics::print("Matrix initialization failed!");
-            return;
-        }
+        m_Matrix.begin();
     }
 
-    RgbMatrixRenderingAPI::~RgbMatrixRenderingAPI() {
+    RgbMatrixRenderingAPI::~RgbMatrixRenderingAPI()
+    {
     }
 
-
-    void RgbMatrixRenderingAPI::drawPixel(int x, int y, uint16_t color) const {
+    void RgbMatrixRenderingAPI::drawPixel(int x, int y, uint16_t color) const
+    {
         m_Matrix.drawPixel(x, y, color);
     }
-    
-    void RgbMatrixRenderingAPI::swapFrameBuffers() const {
-        m_Matrix.show();
+
+    void RgbMatrixRenderingAPI::swapFrameBuffers() const
+    {
+        m_Matrix.flipDMABuffer();
+        m_Matrix.clearScreen();
     }
 }
+
 #endif
