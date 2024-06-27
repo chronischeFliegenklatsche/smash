@@ -37,11 +37,11 @@ namespace smash
                 {
                     
                     const ShaderProgram* shaderProgram = shaderProgramProvider->getShaderProgram().get();
-                    /*
+                    
                     if (shaderProgram)
                     {
                         shaderProgram->execute(m_RenderingAPI.get());
-                    }*/   
+                    }
                 }
                 
             }
