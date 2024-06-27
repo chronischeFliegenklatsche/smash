@@ -3,7 +3,7 @@ CC = gcc
 CXX = g++
 
 # Compiler flags
-CFLAGS = -Wall -fPIC -Iinclude -IC:/smash/include
+CFLAGS = -Wall -fPIC -Iinclude
 CXXFLAGS := $(CFLAGS)
 LDFLAGS = -lopengl32 -lgdi32
 
