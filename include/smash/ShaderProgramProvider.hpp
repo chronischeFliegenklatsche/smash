@@ -12,7 +12,7 @@ namespace smash
 
     class ShaderProgramProvider
     {
-        static const char* const s_ShaderProgramProviderTypes[];
+        static const std::string s_ShaderProgramProviderTypes[];
 
     public:
 

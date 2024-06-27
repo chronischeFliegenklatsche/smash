@@ -30,17 +30,18 @@ namespace smash
 #ifdef ARDUINO
                 if (ShaderProgramProvider::hasShaderProgram((TypeNameProvider*)&component))
                 {
-                    shaderProgramProvider = (const ShaderProgramProvider*)&component;
+                    shaderProgramProvider = (const ShaderProgramProvider*)(&component);
                 }
 #endif
-                
                 if (shaderProgramProvider)
                 {
+                    
                     const ShaderProgram* shaderProgram = shaderProgramProvider->getShaderProgram().get();
+                    /*
                     if (shaderProgram)
                     {
                         shaderProgram->execute(m_RenderingAPI.get());
-                    }   
+                    }*/   
                 }
                 
             }

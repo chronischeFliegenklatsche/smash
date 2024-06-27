@@ -17,7 +17,7 @@ namespace smash
         {
             _components.addComponent(*component);
         }
-
+        
         gameObject.get()->_scene = this;
     }
 
