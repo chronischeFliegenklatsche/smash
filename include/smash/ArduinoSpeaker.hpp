@@ -2,7 +2,7 @@
 #define _ARDUINO_SPEAKER_HPP
 
 #include "Tone.hpp"
-#include "SpeakerTone.hpp"
+#include "ArduinoSpeakerTone.hpp"
 
 namespace smash {
 
