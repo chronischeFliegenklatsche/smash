@@ -5,7 +5,10 @@
 #include <memory>
 #endif
 
-#ifdef ARDUINO
+#ifdef ESP32
+#include <memory>
+#pragma message("Using esp ptrs")
+#elif defined(ARDUINO)
 #include <ArxSmartPtr.h>
 #endif
 

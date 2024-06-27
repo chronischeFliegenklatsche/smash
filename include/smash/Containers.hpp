@@ -9,7 +9,13 @@
 #include <utility>
 #endif
 
-#ifdef ARDUINO
+#ifdef ESP32
+#include <vector>
+#include <array>
+#include <map>
+#include <deque>
+#include <utility>
+#elif defined(ARDUINO)
 #include <ArxContainer.h>
 #endif
 

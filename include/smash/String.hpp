@@ -5,8 +5,9 @@
 #include <string>
 #endif
 
-#ifdef ARDUINO
-
+#ifdef ESP32
+#include <string>
+#elif defined(ARDUINO)
 #include <Arduino.h>
 #include <ArxStringUtils.h>
 #endif

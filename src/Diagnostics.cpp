@@ -15,7 +15,7 @@ namespace smash
     {
 #ifdef ESP32
         Serial.begin(115200);   
-#elif ARDUINO
+#elif defined(ARDUINO)
         Serial.begin(9600);
 #endif
         
