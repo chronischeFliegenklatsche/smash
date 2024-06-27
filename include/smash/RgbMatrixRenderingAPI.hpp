@@ -1,3 +1,4 @@
+#ifdef ARDUINO
 #ifndef _RGB_MATRIX_RENDERING_API_HPP
 #define _RGB_MATRIX_RENDERING_API_HPP
 
@@ -8,4 +9,5 @@ namespace smash
 {
 
 }
+#endif
 #endif
