@@ -5,6 +5,7 @@ namespace smash
 {
     RgbMatrixRenderingAPI::RgbMatrixRenderingAPI(HUB75_I2S_CFG mxconfig) : m_Matrix(mxconfig)
     {
+        mxconfig.double_buff = true;
         m_Matrix.begin();
     }
 
