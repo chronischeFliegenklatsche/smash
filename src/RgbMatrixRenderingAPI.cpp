@@ -34,10 +34,6 @@ namespace smash
 
     void RgbMatrixRenderingAPI::drawRect(int x, int y, int w, int h, uint16_t color) const
     {
-        Diagnostics::print("Rect X " + std::to_string(x));
-        Diagnostics::print("Rect Y " + std::to_string(y));
-        Diagnostics::print("Rect W " + std::to_string(w));
-        Diagnostics::print("Rect H " + std::to_string(h));
         m_Matrix.fillRect(x, y, w, h, color);
     }
 

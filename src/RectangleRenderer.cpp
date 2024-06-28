@@ -66,7 +66,6 @@ namespace smash {
             if (transform)
             {
                 renderingAPI->drawRect((int)transform->getPosition().x, (int)transform->getPosition().y, (int)m_Size.x, (int)m_Size.y, m_Color.getRGB16());
-                delay(10000);
             }
             
         }
