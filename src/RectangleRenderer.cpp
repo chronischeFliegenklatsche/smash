@@ -4,33 +4,32 @@
 namespace smash {
 
     RectangleRenderer::RectangleRenderer()
-        : m_Color(), m_Size(Vector2(1.0f, 1.0f)), m_ShaderProgram(nullptr) {
-            createShaderProgram();
+        : m_Color(), m_Size(Vector2(1.0f, 1.0f)) {
+            
         }
 
     RectangleRenderer::RectangleRenderer(Vector2 size)
-        : m_Color(), m_Size(size), m_ShaderProgram(nullptr) {
-            createShaderProgram();
+        : m_Color(), m_Size(size) {
+            
         }
 
     RectangleRenderer::RectangleRenderer(float width, float height)
-        : m_Color(), m_Size(Vector2(width, height)), m_ShaderProgram(nullptr) {
-            createShaderProgram();
+        : m_Color(), m_Size(Vector2(width, height)) {
+            
         }
 
     RectangleRenderer::RectangleRenderer(Vector2 size, Color color)
-        : m_Color(color), m_Size(size), m_ShaderProgram(nullptr) {
-            createShaderProgram();
+        : m_Color(color), m_Size(size) {
+            
         }
 
     RectangleRenderer::RectangleRenderer(float width, float height, Color color)
-        : m_Color(color), m_Size(Vector2(width, height)), m_ShaderProgram(nullptr) {
-            createShaderProgram();
+        : m_Color(color), m_Size(Vector2(width, height)) {
+            
         }
 
     void RectangleRenderer::setSize(Vector2 size) {
         m_Size = size;
-        m_ShaderProgram->getAttributes()->setVector("m_Size", m_Size);
     }
 
     Vector2 RectangleRenderer::getSize() {
@@ -39,66 +38,38 @@ namespace smash {
 
     void RectangleRenderer::setColor(Color color) {
         m_Color = color;
-        m_ShaderProgram->getAttributes()->setColor("m_Color", Color(m_Color));
     }
 
     Color RectangleRenderer::getColor() {
         return m_Color;
     }
 
-    std::shared_ptr<const ShaderProgram> RectangleRenderer::getShaderProgram() const {
-        return m_ShaderProgram;
-    }
 
     Component* RectangleRenderer::clone() const {
         return new RectangleRenderer(*this);
     }
 
     void RectangleRenderer::update() {
-        // Implement any update logic here
-        GameObject *gameObject = getGameObject();
-        if (gameObject)
-        {
-            const Transform *transform = nullptr;
-#ifdef _WIN32
-            transform = gameObject->getComponent<Transform>().get();
-#endif
-#ifdef ARDUINO
-            transform = (Transform*)gameObject->getComponent("Transform").get();
-#endif
-            if (transform)
-            {
-                m_ShaderProgram->getAttributes()->setVector("m_Position", transform->getPosition());
-            }
-        }
+
     }
     
-    void RectangleRenderer::createShaderProgram() {
-        // Implement shader program creation here
-        m_ShaderProgram = std::make_shared<ShaderProgram>();
-        m_ShaderProgram->addShader(std::shared_ptr<Shader>(new RectangleShader()));
-        std::shared_ptr<ShaderAttributes> attributes = std::make_shared<ShaderAttributes>();
-        GameObject *gameObject = getGameObject();
-        if (gameObject)
-        {
-            const Transform *transform = nullptr;
-#ifdef _WIN32
-            transform = gameObject->getComponent<Transform>().get();
-#endif
-#ifdef ARDUINO
-            transform = (Transform*)gameObject->getComponent("Transform").get();
-#endif
-            if (transform)
-            {
-                attributes->setVector("m_Position", transform->getPosition());
-            }
-        }
-        attributes->setVector("m_Size", m_Size);
-        attributes->setColor("m_Color", Color(m_Color));
-        m_ShaderProgram->setAttributes(attributes);
-    }
 
     std::string RectangleRenderer::getTypeName() const {
         return "RectangleRenderer";
+    }
+
+    void RectangleRenderer::render(const RenderingAPI* renderingAPI) const {
+        
+        if (getGameObject())
+        {
+            Transform* transform = (Transform*)getGameObject()->getComponent("Transform").get();
+            if (transform)
+            {
+                renderingAPI->drawRect((int)transform->getPosition().x, (int)transform->getPosition().y, (int)m_Size.x, (int)m_Size.y, m_Color.getRGB16());
+                delay(10000);
+            }
+            
+        }
+
     }
 }

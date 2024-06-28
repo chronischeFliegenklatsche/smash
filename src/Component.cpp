@@ -17,4 +17,7 @@ namespace smash
 
     Component::~Component()
     {}
+
+    void Component::render(const RenderingAPI* renderingAPI) const
+    {}
 }

@@ -17,11 +17,6 @@
 #include "smash/Runtime.hpp"
 #include "smash/Scene.hpp"
 #include "smash/SceneManagement.hpp"
-#include "smash/Shader.hpp"
-#include "smash/ShaderAttributes.hpp"
-#include "smash/ShaderProgram.hpp"
-#include "smash/ShaderProgramProvider.hpp"
-#include "smash/ShaderUniforms.hpp"
 #include "smash/SmartPointers.hpp"
 #include "smash/String.hpp"
 #include "smash/TestComponent.hpp"
@@ -33,7 +28,6 @@
 #include "smash/Vector2.hpp"
 #include "smash/Transform.hpp"
 #include "smash/RectangleRenderer.hpp"
-#include "smash/RectangleShader.hpp"
 #include "smash/EngineLoop.hpp"
 
 // For embedded platforms such as Arduino and ESP32

@@ -3,20 +3,15 @@
 
 #include "SmartPointers.hpp"
 #include "Component.hpp"
-#include "ShaderProgramProvider.hpp"
 #include "Vector2.hpp"
 #include "Color.hpp"
 
 namespace smash
 {
-    class RectangleRenderer : public Component, public ShaderProgramProvider
+    class RectangleRenderer : public Component
     {
         Color m_Color;
         Vector2 m_Size;
-        std::shared_ptr<ShaderProgram> m_ShaderProgram;
-
-        void createShaderProgram();
-
     public:
 
         RectangleRenderer();
@@ -31,10 +26,9 @@ namespace smash
         void setColor(Color color);
         Color getColor();
 
-        std::shared_ptr<const ShaderProgram> getShaderProgram() const override;
-
         Component* clone() const override;
         void update() override;
+        void render(const RenderingAPI* renderingAPI) const override;
 
         std::string getTypeName() const override;
     };

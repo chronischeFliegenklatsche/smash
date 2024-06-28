@@ -16,6 +16,7 @@ namespace smash
         virtual ~RenderingAPI();
         virtual void drawPixel(int x, int y, uint16_t color) const = 0;
         virtual void swapFrameBuffers() const = 0;
+        virtual void drawRect(int x, int y, int w, int h, uint16_t color) const = 0;
     };
 }
 

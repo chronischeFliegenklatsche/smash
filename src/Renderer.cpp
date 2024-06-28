@@ -19,30 +19,13 @@ namespace smash
 
     void Renderer::render(const Scene* _scene) const
     {
+        
         if (m_RenderingAPI && _scene)
         {
             for (const Component& component : _scene->_components)
             {
-                const ShaderProgramProvider* shaderProgramProvider = nullptr;
-#ifdef _WIN32
-                shaderProgramProvider = dynamic_cast<const ShaderProgramProvider*>(&component);  
-#endif
-#ifdef ARDUINO
-                if (ShaderProgramProvider::hasShaderProgram((TypeNameProvider*)&component))
-                {
-                    shaderProgramProvider = (const ShaderProgramProvider*)(&component);
-                }
-#endif
-                if (shaderProgramProvider)
-                {
-                    
-                    const ShaderProgram* shaderProgram = shaderProgramProvider->getShaderProgram().get();
-                    
-                    if (shaderProgram)
-                    {
-                        shaderProgram->execute(m_RenderingAPI.get());
-                    }
-                }
+                
+                component.render(m_RenderingAPI.get());
                 
             }
             m_RenderingAPI->swapFrameBuffers();

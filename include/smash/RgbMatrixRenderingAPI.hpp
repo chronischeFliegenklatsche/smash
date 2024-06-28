@@ -16,6 +16,7 @@ namespace smash
         ~RgbMatrixRenderingAPI() override;
         void drawPixel(int x, int y, uint16_t color) const override;
         void swapFrameBuffers() const override;
+        void drawRect(int x, int y, int w, int h, uint16_t color) const override;
     };
 }
 #endif
