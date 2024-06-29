@@ -1,20 +1,19 @@
-#ifndef _SHADER_HPP
-#define _SHADER_HPP
+#ifndef _FRAGMENT_SHADER_HPP
+#define _FRAGMENT_SHADER_HPP
 
-#include "Canvas.hpp"
+#include "Shader.hpp"
 #include <cstddef> 
 
 namespace smash
 {
-    class FragmentShader;
-    class FragmentShader
+    class FragmentShader : public Shader
     {
     public:
 
         FragmentShader() = default;
         virtual ~FragmentShader() = default;
 
-        virtual void execute(Canvas& _canvas) const;
+        virtual void shade(Canvas& _canvas) const override;
         virtual void fragment(size_t x, size_t y, Color& color) const = 0;
     };  
 }

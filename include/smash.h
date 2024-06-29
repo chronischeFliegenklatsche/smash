@@ -26,7 +26,11 @@
 #include "smash/Canvas.hpp"
 #include "smash/FragmentShader.hpp"
 #include "smash/RectShader.hpp"
-#include "smash/FragmentShaderPass.hpp"
+#include "smash/Shader.hpp"
+#include "smash/ShaderProgram.hpp"
+#include "smash/ShaderAttributes.hpp"
+#include "smash/ShaderRenderer.hpp"
+#include "smash/VertexShader.hpp"
 
 // For ESP32 platform
 #ifdef ESP32

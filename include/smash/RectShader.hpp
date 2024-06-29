@@ -7,16 +7,10 @@ namespace smash
 {
     class RectShader : public FragmentShader
     {
-        const float *x;
-        const float *y;
-        const float *w;
-        const float *h;
-        const Color *color;
     public:
 
-        RectShader();
-        RectShader(const float* x, const float* y, const float* w, const float* h, const Color* color);
-        ~RectShader() override {}
+        RectShader() = default;
+        ~RectShader() override = default;
 
         void fragment(size_t x, size_t y, Color& color) const override;
     };

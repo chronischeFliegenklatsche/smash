@@ -3,7 +3,7 @@
 
 namespace smash
 {
-    void FragmentShader::execute(Canvas& _canvas) const
+    void FragmentShader::shade(Canvas& _canvas) const
     {
         for (size_t y = 0; y < _canvas.getHeight(); ++y)
         {
@@ -14,6 +14,7 @@ namespace smash
                 _canvas.setPixel(x, y, color);
             }
         }
+
     }
 
     
