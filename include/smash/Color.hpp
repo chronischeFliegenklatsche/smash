@@ -15,6 +15,17 @@ namespace smash
         // RGB format (uint16_t)
         uint16_t getRGB16() const;
 
+        // Compare
+        bool operator==(const Color& other) const
+        {
+            return r == other.r && g == other.g && b == other.b;
+        }
+
+        bool operator!=(const Color& other) const
+        {
+            return !(*this == other);
+        }
+
         // Static colors
         static const Color black;
         static const Color white;

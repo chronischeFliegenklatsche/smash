@@ -30,7 +30,6 @@
 #include "smash/ShaderProgram.hpp"
 #include "smash/ShaderAttributes.hpp"
 #include "smash/ShaderRenderer.hpp"
-#include "smash/VertexShader.hpp"
 
 // For ESP32 platform
 #ifdef ESP32

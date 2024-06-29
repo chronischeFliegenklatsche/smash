@@ -17,7 +17,6 @@ namespace smash
     {
         
         m_ShaderProgram.use(*m_StartFrameShaderAttributes, _renderingAPI);
-        Diagnostics::print("Rendering ShaderRenderer");
 
     }
 
