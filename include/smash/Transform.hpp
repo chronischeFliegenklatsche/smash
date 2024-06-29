@@ -21,8 +21,14 @@ namespace smash
         Transform(float x, float y, float scaleX, float scaleY);
 
         void translate(Vector2 translation);
+
         void setPosition(Vector2 position);
         Vector2 getPosition() const;
+        Vector2& getPositionRef();
+
+        void setScale(Vector2 scale);
+        Vector2 getScale() const;
+        Vector2& getScaleRef();
 
         Component* clone() const override;
         void update() override;

@@ -6,6 +6,9 @@ namespace smash
     const Runtime *Application::s_CurrentRuntime = nullptr;
 
     Runtime::Runtime() {
+#ifdef ESP32
+        smash::Diagnostics::initializeSerialConnection();
+#endif
         Application::s_CurrentRuntime = this;
         Diagnostics::print("Runtime initialized.");
     }

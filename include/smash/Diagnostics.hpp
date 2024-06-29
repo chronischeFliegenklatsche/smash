@@ -18,10 +18,18 @@ namespace smash
 
     class Diagnostics
     {
+        friend class Diagnoser;
         static Diagnoser _diagnoser;
     public:
         static void print(std::string text);
         static void memoryTest(int componentsCount);
+#ifdef ESP32
+    private:
+        static bool _SERIAL_INITIALIZED;
+    public:
+        static void initializeSerialConnection();
+        static void printRAMInfo();
+#endif
     };
 }
 

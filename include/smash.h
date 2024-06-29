@@ -23,6 +23,10 @@
 #include "smash/Vector2.hpp"
 #include "smash/Transform.hpp"
 #include "smash/EngineLoop.hpp"
+#include "smash/Canvas.hpp"
+#include "smash/FragmentShader.hpp"
+#include "smash/RectShader.hpp"
+#include "smash/FragmentShaderPass.hpp"
 
 // For ESP32 platform
 #ifdef ESP32
@@ -42,3 +46,7 @@
 #include "smash/GLInputAPI.hpp"
 #include "smash/GLRenderingAPI.hpp"
 #endif
+
+// typedefs
+typedef smash::Vector2 vec2;
+typedef smash::Color color;

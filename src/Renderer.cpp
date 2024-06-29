@@ -24,7 +24,6 @@ namespace smash
         {
             for (const Component& component : _scene->_components)
             {
-                
                 component.render(*m_RenderingAPI);
                 
             }

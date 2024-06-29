@@ -34,6 +34,26 @@ namespace smash
         m_Matrix.fillRect(x, y, w, h, color);
     }
 
-}
+    size_t RgbMatrixRenderingAPI::getCanvasWidth() const
+    {
+        return m_Matrix.width();
+    }
 
+    size_t RgbMatrixRenderingAPI::getCanvasHeight() const
+    {
+        return m_Matrix.height();
+    }
+
+    void RgbMatrixRenderingAPI::drawCanvas(const Canvas& _canvas) const
+    {
+        for (int x = 0; x < _canvas.getWidth(); x++)
+        {
+            for (int y = 0; y < _canvas.getHeight(); y++)
+            {
+                drawPixel(x, y, _canvas.getPixel((size_t)x, (size_t)y).getRGB16());
+            }
+        }
+    }
+
+}
 #endif

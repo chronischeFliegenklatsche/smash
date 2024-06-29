@@ -40,7 +40,7 @@ namespace smash
 
     class SceneManagement
     {
-        static SceneManager m_SceneManager;
+        static SceneManager s_SceneManager;
     public:
     
             static void addScene(std::shared_ptr<Scene> scene);

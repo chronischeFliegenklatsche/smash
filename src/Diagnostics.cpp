@@ -7,15 +7,15 @@
 
 #ifdef ESP32
 #include <Arduino.h>
+#include "esp_system.h"
 #endif
 
 namespace smash
 {
+
     Diagnoser::Diagnoser()
     {
-#ifdef ESP32
-        Serial.begin(115200);   
-#endif
+
     }
 
     void Diagnoser::print(std::string text)
@@ -24,6 +24,10 @@ namespace smash
         std::cout << text << std::endl;
 #endif
 #ifdef ESP32
+        if (Diagnostics::_SERIAL_INITIALIZED == false)
+        {
+            Diagnostics::initializeSerialConnection();
+        }
         Serial.println(text.c_str());
 #endif
     }
@@ -106,4 +110,22 @@ fail:
     {
         _diagnoser.memoryTest(componentsCount);
     }
+
+#ifdef ESP32
+    bool Diagnostics::_SERIAL_INITIALIZED = false;
+    void Diagnostics::initializeSerialConnection()
+    {
+        if (!_SERIAL_INITIALIZED)
+        {
+            Serial.begin(115200);
+            _SERIAL_INITIALIZED = true;
+        }
+    }
+
+    void Diagnostics::printRAMInfo()
+    {
+        print("Free heap memory: " + std::to_string(esp_get_free_heap_size()));
+    }
+
+#endif
 }

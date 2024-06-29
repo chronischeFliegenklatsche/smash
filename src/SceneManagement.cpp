@@ -3,7 +3,7 @@
 
 namespace smash
 {
-    SceneManager SceneManagement::m_SceneManager;
+    SceneManager SceneManagement::s_SceneManager;
 
     SceneManager::SceneManager()
         : m_ActiveScene(nullptr)
@@ -82,41 +82,41 @@ namespace smash
 
     void SceneManagement::addScene(std::shared_ptr<Scene> scene)
     {
-        m_SceneManager.addScene(scene);
+        s_SceneManager.addScene(scene);
     }
 
     bool SceneManagement::removeScene(std::shared_ptr<Scene> scene)
     {
-        return m_SceneManager.removeScene(scene);
+        return s_SceneManager.removeScene(scene);
     }
 
     bool SceneManagement::removeScene(size_t index)
     {
-        return m_SceneManager.removeScene(index);
+        return s_SceneManager.removeScene(index);
     }
 
     size_t SceneManagement::getScenesCount()
     {
-        return m_SceneManager.getScenesCount();
+        return s_SceneManager.getScenesCount();
     }
 
     void SceneManagement::setActiveScene(const Scene* scene)
     {
-        m_SceneManager.setActiveScene(scene);
+        s_SceneManager.setActiveScene(scene);
     }
 
     Scene* SceneManagement::getActiveScene()
     {
-        return m_SceneManager.getActiveScene();
+        return s_SceneManager.getActiveScene();
     }
 
     void SceneManagement::updateActiveScene()
     {
-        m_SceneManager.updateActiveScene();
+        s_SceneManager.updateActiveScene();
     }
 
     Scene& SceneManagement::getScene(size_t index)
     {
-        return m_SceneManager[index];
+        return s_SceneManager[index];
     }
 }
