@@ -1,7 +1,7 @@
 #ifndef _INPUT_API_HPP
 #define _INPUT_API_HPP
 
-#include "SmartPointers.hpp"
+#include <memory>
 #include "InputSystem.hpp"
 
 namespace smash

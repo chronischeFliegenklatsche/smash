@@ -1,7 +1,7 @@
 #ifndef _COLOR_HPP
 #define _COLOR_HPP
 
-#include "Integers.hpp"
+#include <stdint.h>
 
 namespace smash
 {

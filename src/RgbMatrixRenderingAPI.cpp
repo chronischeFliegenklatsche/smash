@@ -1,4 +1,4 @@
-#ifdef ARDUINO
+#ifdef ESP32
 #include <smash.h>
 
 namespace smash
@@ -14,9 +14,6 @@ namespace smash
 
     void RgbMatrixRenderingAPI::drawPixel(int x, int y, uint16_t color) const
     {
-        Diagnostics::print("Pixel X " + std::to_string(x));
-        Diagnostics::print("Pixel Y " + std::to_string(y));
-        
         m_Matrix.drawPixel(x, y, color);
     }
 

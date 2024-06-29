@@ -1,8 +1,10 @@
 #ifndef _SCENE_MANAGEMENT_HPP
 #define _SCENE_MANAGEMENT_HPP
 
-#include "Containers.hpp"
-#include "SmartPointers.hpp"
+
+#include <memory>
+#include <vector>
+
 #include "Scene.hpp"
 
 namespace smash
@@ -24,7 +26,7 @@ namespace smash
 
         size_t getScenesCount() const;
 
-        void setActiveScene(std::shared_ptr<Scene> scene);
+        void setActiveScene(const Scene* scene);
 
         Scene* getActiveScene();
         const Scene* getActiveScene() const;
@@ -47,7 +49,7 @@ namespace smash
     
             static size_t getScenesCount();
     
-            static void setActiveScene(std::shared_ptr<Scene> scene);
+            static void setActiveScene(const Scene* scene);
     
             static Scene* getActiveScene();
     

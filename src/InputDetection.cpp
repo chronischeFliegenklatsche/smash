@@ -9,11 +9,6 @@ namespace smash
     {
     }
 
-    InputDetector::InputDetector(std::shared_ptr<InputAPI> inputAPI)
-        : m_InputAPI(inputAPI)
-    {
-    }
-
     InputDetector::~InputDetector()
     {
     }

@@ -36,7 +36,7 @@ double Time::getNowTime() {
     auto duration = now.time_since_epoch();
     return std::chrono::duration<double>(duration).count();
 #endif
-#ifdef ARDUINO
+#ifdef ESP32
     return millis() / 1000.0;
 #endif
 }

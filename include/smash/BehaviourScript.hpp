@@ -1,7 +1,8 @@
 #ifndef _BEHAVIOUR_SCRIPT_HPP
 #define _BEHAVIOUR_SCRIPT_HPP
 
-#include "SmartPointers.hpp"
+#include <memory>
+
 #include "Component.hpp"
 #include "GameObject.hpp"
 #include "Scene.hpp"
@@ -32,7 +33,7 @@ namespace smash {
         void instantiate(std::shared_ptr<GameObject> gameObject) const;
         bool destroy(std::shared_ptr<GameObject> gameObject) const;
 
-        void setActiveScene(std::shared_ptr<Scene> scene) const;
+        void setActiveScene(const Scene* scene) const;
 
         Scene* getActiveScene() const;
     };

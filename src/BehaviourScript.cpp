@@ -28,7 +28,7 @@ namespace smash {
         return getGameObject()->getScene()->destroy(gameObject);
     }
 
-    void BehaviourScript::setActiveScene(std::shared_ptr<Scene> scene) const {
+    void BehaviourScript::setActiveScene(const Scene* scene) const {
         SceneManagement::setActiveScene(scene);
     }
 

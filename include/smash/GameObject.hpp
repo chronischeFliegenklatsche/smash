@@ -1,8 +1,8 @@
 #ifndef _GAME_OBJECT_HPP
 #define _GAME_OBJECT_HPP
 
-#include "Containers.hpp"
-#include "SmartPointers.hpp"
+#include <memory>
+#include <vector>
 
 namespace smash
 {

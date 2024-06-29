@@ -1,8 +1,9 @@
 #ifndef _SCENE_HPP
 #define _SCENE_HPP
 
-#include "Containers.hpp"
-#include "SmartPointers.hpp"
+#include <memory>
+#include <vector>
+
 #include "ComponentsContainer.hpp"  
 
 namespace smash
@@ -22,7 +23,7 @@ namespace smash
 
         void instantiate(std::shared_ptr<GameObject> gameObject);   
         bool destroy(std::shared_ptr<GameObject> gameObject);
-
+        
         virtual void update();
 
     };

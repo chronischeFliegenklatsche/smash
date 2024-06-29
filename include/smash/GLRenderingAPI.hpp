@@ -1,7 +1,6 @@
 #ifndef _GLFW_RENDERING_API_HPP
 #define _GLFW_RENDERING_API_HPP
 
-#include "SmartPointers.hpp"
 #include "RenderingAPI.hpp"
 #include <GLFW/glfw3.h>
 #include "GLBaseAPI.hpp"

@@ -11,11 +11,14 @@ namespace smash
     class Transform : public Component
     {
         Vector2 m_Position;
+        Vector2 m_Scale;
     public:
 
         Transform();
         Transform(Vector2 position);
         Transform(float x, float y);
+        Transform(Vector2 position, Vector2 scale);
+        Transform(float x, float y, float scaleX, float scaleY);
 
         void translate(Vector2 translation);
         void setPosition(Vector2 position);

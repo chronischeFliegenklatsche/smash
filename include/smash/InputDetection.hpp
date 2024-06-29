@@ -1,7 +1,8 @@
 #ifndef _INPUT_DETECTION_HPP
 #define _INPUT_DETECTION_HPP
 
-#include "Containers.hpp"
+#include <memory>
+
 #include "InputAPI.hpp"
 #include "InputSystem.hpp"
 
@@ -16,7 +17,6 @@ namespace smash
     public:
 
         InputDetector();
-        InputDetector(std::shared_ptr<InputAPI> inputAPI);
         virtual ~InputDetector();
 
         void setInputAPI(std::shared_ptr<const InputAPI> inputAPI);
@@ -32,7 +32,7 @@ namespace smash
     public:
 
         static void setInputAPI(std::shared_ptr<const InputAPI> inputAPI);
-        static std::shared_ptr<const InputAPI> getInputAPI();
+        std::shared_ptr<const InputAPI> getInputAPI();
 
         static void updateInputs();
     };

@@ -12,7 +12,7 @@ namespace smash
         m_RenderingAPI = renderingAPI;
     }
 
-    const std::shared_ptr<const RenderingAPI> Renderer::getRenderingAPI() const
+    std::shared_ptr<const RenderingAPI> Renderer::getRenderingAPI() const
     {
         return m_RenderingAPI;
     }
@@ -25,10 +25,10 @@ namespace smash
             for (const Component& component : _scene->_components)
             {
                 
-                component.render(m_RenderingAPI.get());
+                component.render(*m_RenderingAPI);
                 
             }
-            m_RenderingAPI->swapFrameBuffers();
+            m_RenderingAPI->swapFrameBuffers();  
         }
     }
 
@@ -37,7 +37,7 @@ namespace smash
         m_Renderer.setRenderingAPI(renderingAPI);
     }
 
-    const std::shared_ptr<const RenderingAPI> Rendering::getRenderingAPI()
+    std::shared_ptr<const RenderingAPI> Rendering::getRenderingAPI()
     {
         return m_Renderer.getRenderingAPI();
     }

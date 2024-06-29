@@ -22,7 +22,7 @@ namespace smash
         virtual ~Component();
         virtual Component* clone() const = 0;
         virtual void update() = 0;
-        virtual void render(const RenderingAPI* renderingAPI) const;
+        virtual void render(const RenderingAPI& _renderingAPI) const;
         virtual std::string getTypeName() const = 0;
     };
 }

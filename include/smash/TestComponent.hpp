@@ -8,11 +8,14 @@ namespace smash
     class TestComponent : public Component
     {
     public:
+
         TestComponent();
         ~TestComponent();
+
         virtual void update() override;
         Component* clone() const override;
         std::string getTypeName() const override;
+        
     };
 }
 #endif

@@ -3,17 +3,17 @@
 
 namespace smash
 {
-    const Runtime *Application::m_CurrentRuntime = nullptr;
+    const Runtime *Application::s_CurrentRuntime = nullptr;
 
     Runtime::Runtime() {
-        Application::m_CurrentRuntime = this;
+        Application::s_CurrentRuntime = this;
         Diagnostics::print("Runtime initialized.");
     }
 
     void Runtime::pipe() const
     {
         Time::registerFrameBegin();
-        Application::m_CurrentRuntime = this;
+        Application::s_CurrentRuntime = this;
         InputDetection::updateInputs();
         SceneManagement::updateActiveScene();
         Rendering::render();
@@ -33,14 +33,14 @@ namespace smash
     }
 
     void Application::queueApplicationExit() {
-        if (m_CurrentRuntime) {
-            m_CurrentRuntime->queueRuntimeExit();
+        if (s_CurrentRuntime) {
+            s_CurrentRuntime->queueRuntimeExit();
         }
     }
 
     bool Application::getApplicationExitQueued() {
-        if (m_CurrentRuntime) {
-            return m_CurrentRuntime->getRuntimeExitQueued();
+        if (s_CurrentRuntime) {
+            return s_CurrentRuntime->getRuntimeExitQueued();
         }
         return false;
     }   

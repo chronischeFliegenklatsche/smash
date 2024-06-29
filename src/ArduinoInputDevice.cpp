@@ -1,4 +1,4 @@
-#ifdef ARDUINO
+#ifdef ESP32
 #include <smash.h>
 
 namespace smash

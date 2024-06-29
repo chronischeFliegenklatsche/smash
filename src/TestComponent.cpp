@@ -5,7 +5,7 @@
 #include <iostream>
 #endif
 
-#ifdef ARDUINO
+#ifdef ESP32
 #include <Arduino.h>
 #endif
 

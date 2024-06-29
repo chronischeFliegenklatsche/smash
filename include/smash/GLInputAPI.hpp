@@ -1,7 +1,6 @@
 #ifndef _GLFW_INPUT_API_HPP
 #define _GLFW_INPUT_API_HPP
 
-#include "SmartPointers.hpp"
 #include "InputAPI.hpp"
 #include "GLBaseAPI.hpp"
 #include <GLFW/glfw3.h>

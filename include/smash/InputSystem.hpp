@@ -1,8 +1,9 @@
 #ifndef _INPUT_SYSTEM_HPP
 #define _INPUT_SYSTEM_HPP
 
-#include "Containers.hpp"
-#include "String.hpp"
+#include <map>
+#include <string>
+
 #include "KeyCodes.hpp"
 
 namespace smash

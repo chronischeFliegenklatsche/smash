@@ -5,7 +5,7 @@
 #include <iostream>
 #endif
 
-#ifdef ARDUINO
+#ifdef ESP32
 #include <Arduino.h>
 #endif
 
@@ -15,10 +15,7 @@ namespace smash
     {
 #ifdef ESP32
         Serial.begin(115200);   
-#elif defined(ARDUINO)
-        Serial.begin(9600);
 #endif
-        
     }
 
     void Diagnoser::print(std::string text)
@@ -26,7 +23,7 @@ namespace smash
 #ifdef _WIN32
         std::cout << text << std::endl;
 #endif
-#ifdef ARDUINO
+#ifdef ESP32
         Serial.println(text.c_str());
 #endif
     }

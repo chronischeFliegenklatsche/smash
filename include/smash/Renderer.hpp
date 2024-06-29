@@ -1,7 +1,8 @@
 #ifndef _RENDERER_HPP
 #define _RENDERER_HPP
 
-#include "SmartPointers.hpp"
+#include <memory>
+
 #include "RenderingAPI.hpp"
 #include "Scene.hpp"
 
@@ -18,7 +19,7 @@ namespace smash
         Renderer();
 
         void setRenderingAPI(std::shared_ptr<const RenderingAPI> renderingAPI);
-        const std::shared_ptr<const RenderingAPI> getRenderingAPI() const;
+        std::shared_ptr<const RenderingAPI> getRenderingAPI() const;
 
         void render(const Scene* _scene) const;
     };
@@ -30,7 +31,7 @@ namespace smash
 
         static void setRenderingAPI(std::shared_ptr<const RenderingAPI> renderingAPI);
 
-        static const std::shared_ptr<const RenderingAPI> getRenderingAPI();
+        static std::shared_ptr<const RenderingAPI> getRenderingAPI();
 
         static void render();
     };

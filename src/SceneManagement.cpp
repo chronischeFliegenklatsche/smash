@@ -42,13 +42,13 @@ namespace smash
         return m_Scenes.size();
     }
 
-    void SceneManager::setActiveScene(std::shared_ptr<Scene> scene)
+    void SceneManager::setActiveScene(const Scene* scene)
     {
-        for (const auto& s : m_Scenes)
+        for (auto& s : m_Scenes)
         {
-            if (s == scene)
+            if (s.get() == scene)
             {
-                m_ActiveScene = scene.get();
+                m_ActiveScene = s.get();
                 break;
             }
         }
@@ -100,7 +100,7 @@ namespace smash
         return m_SceneManager.getScenesCount();
     }
 
-    void SceneManagement::setActiveScene(std::shared_ptr<Scene> scene)
+    void SceneManagement::setActiveScene(const Scene* scene)
     {
         m_SceneManager.setActiveScene(scene);
     }

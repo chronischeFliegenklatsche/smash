@@ -1,7 +1,7 @@
 #ifndef _RENDERING_API_HPP
 #define _RENDERING_API_HPP
 
-#include "Integers.hpp"
+#include <stdint.h>
 
 namespace smash
 {
@@ -14,9 +14,11 @@ namespace smash
 
         RenderingAPI();
         virtual ~RenderingAPI();
+
         virtual void drawPixel(int x, int y, uint16_t color) const = 0;
-        virtual void swapFrameBuffers() const = 0;
         virtual void drawRect(int x, int y, int w, int h, uint16_t color) const = 0;
+
+        virtual void swapFrameBuffers() const = 0;
     };
 }
 

@@ -1,7 +1,7 @@
 #ifndef _TYPE_NAME_PROVIDER_HPP
 #define _TYPE_NAME_PROVIDER_HPP
 
-#include "String.hpp"
+#include <string>
 
 namespace smash
 {

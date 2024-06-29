@@ -1,7 +1,7 @@
 #ifndef _DIAGNOSTICS_HPP
 #define _DIAGNOSTICS_HPP
 
-#include "String.hpp"
+#include <string>
 
 namespace smash
 {

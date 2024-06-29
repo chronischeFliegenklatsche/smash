@@ -1,7 +1,7 @@
 #ifndef _TEXT_DISPLAY_HPP
 #define _TEXT_DISPLAY_HPP
 
-#include "Integers.hpp"
+#include <stdint.h>
 
 namespace smash {
 
