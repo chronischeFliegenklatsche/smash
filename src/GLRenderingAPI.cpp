@@ -1,7 +1,6 @@
-#include "GLRenderingAPI.hpp"
+#include <smash.h>
 #include <vector>
 #include <cstring>
-#include "Diagnostics.hpp"
 
 namespace smash
 {
@@ -14,6 +13,13 @@ GLRenderingAPI::GLRenderingAPI() : RenderingAPI(), GLBaseAPI()
     if (!glfwGetCurrentContext())
     {
         Diagnostics::print("Error: No OpenGL context available");
+        return;
+    }
+
+    // Load OpenGL functions
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+    {
+        Diagnostics::print("Failed to initialize GLAD");
         return;
     }
 
@@ -109,7 +115,75 @@ GLRenderingAPI::~GLRenderingAPI()
     glDeleteProgram(shaderProgram);
 }
 
-// ... (other methods remain the same)
+void GLRenderingAPI::drawPixel(int x, int y, uint16_t color) const
+{
+    float xPos = (float)x / (float)getCanvasWidth() * 2.0f - 1.0f;
+    float yPos = 1.0f - (float)y / (float)getCanvasHeight() * 2.0f;
+
+    float r = ((color >> 11) & 0x1F) / 31.0f;
+    float g = ((color >> 5) & 0x3F) / 63.0f;
+    float b = (color & 0x1F) / 31.0f;
+
+    float vertices[] = {
+        xPos, yPos, r, g, b
+    };
+
+    glUseProgram(shaderProgram);
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glDrawArrays(GL_POINTS, 0, 1);
+}
+
+void GLRenderingAPI::drawRect(int x, int y, int w, int h, uint16_t color) const
+{
+    float x1 = (float)x / (float)getCanvasWidth() * 2.0f - 1.0f;
+    float y1 = 1.0f - (float)y / (float)getCanvasHeight() * 2.0f;
+    float x2 = (float)(x + w) / (float)getCanvasWidth() * 2.0f - 1.0f;
+    float y2 = 1.0f - (float)(y + h) / (float)getCanvasHeight() * 2.0f;
+
+    float r = ((color >> 11) & 0x1F) / 31.0f;
+    float g = ((color >> 5) & 0x3F) / 63.0f;
+    float b = (color & 0x1F) / 31.0f;
+
+    float vertices[] = {
+        x1, y1, r, g, b,
+        x2, y1, r, g, b,
+        x2, y2, r, g, b,
+        x1, y2, r, g, b
+    };
+
+    glUseProgram(shaderProgram);
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+}
+
+void GLRenderingAPI::drawCanvas(const Canvas& _canvas) const
+{
+    for (size_t y = 0; y < _canvas.getHeight(); ++y)
+    {
+        for (size_t x = 0; x < _canvas.getWidth(); ++x)
+        {
+            drawPixel(x, y, _canvas.getPixel(x, y).getRGB16());
+        }
+    }
+}
+
+size_t GLRenderingAPI::getCanvasWidth() const
+{
+    int width;
+    glfwGetFramebufferSize(glfwGetCurrentContext(), &width, nullptr);
+    return static_cast<size_t>(width);
+}
+
+size_t GLRenderingAPI::getCanvasHeight() const
+{
+    int height;
+    glfwGetFramebufferSize(glfwGetCurrentContext(), nullptr, &height);
+    return static_cast<size_t>(height);
+}
 
 void GLRenderingAPI::swapFrameBuffers() const
 {
