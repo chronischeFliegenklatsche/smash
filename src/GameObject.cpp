@@ -78,9 +78,6 @@ namespace smash
     template std::shared_ptr<Transform> GameObject::getComponent<Transform>();
     template const std::shared_ptr<Transform> GameObject::getComponent<Transform>() const;
 
-    template std::shared_ptr<RectangleRenderer> GameObject::getComponent<RectangleRenderer>();
-    template const std::shared_ptr<RectangleRenderer> GameObject::getComponent<RectangleRenderer>() const;
-
 #endif
 
     std::shared_ptr<Component> GameObject::getComponent(const std::string& typeName)
