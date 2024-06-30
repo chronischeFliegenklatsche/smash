@@ -16,6 +16,12 @@ namespace smash
         ~GLRenderingAPI() override;
 
         void drawPixel(int x, int y, uint16_t color) const override;
+        void drawRect(int x, int y, int w, int h, uint16_t color) const override;
+        void drawCanvas(const Canvas& _canvas) const override;
+
+        size_t getCanvasWidth() const override;
+        size_t getCanvasHeight() const override;
+
         void swapFrameBuffers() const override;
     };
 }
