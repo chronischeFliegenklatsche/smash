@@ -153,6 +153,13 @@ void GLRenderingAPI::drawRect(int x, int y, int w, int h, uint16_t color) const
         x1, y2, r, g, b
     };
 
+    glUseProgram(shaderProgram);
+    glBindVertexArray(vao);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glDrawArrays(GL_TRIANGLE_FAN, 0, 4);
+}
+
 void GLRenderingAPI::drawCanvas(const Canvas& _canvas) const
 {
     for (size_t y = 0; y < _canvas.getHeight(); ++y)
@@ -192,4 +199,4 @@ void GLRenderingAPI::swapFrameBuffers() const
     }
 }
 
-}
+} 
