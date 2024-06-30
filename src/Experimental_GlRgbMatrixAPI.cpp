@@ -36,4 +36,8 @@ namespace smash
             }
         }
     }
+
+    size_t Experimental_GlRgbMatrixAPI::getCanvasWidth() const { return 64; }
+    size_t Experimental_GlRgbMatrixAPI::getCanvasHeight() const { return 32; }
+    void Experimental_GlRgbMatrixAPI::swapFrameBuffers() const { m_GlRenderer.swapFrameBuffers(); }
 }

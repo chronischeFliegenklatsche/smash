@@ -17,6 +17,11 @@ namespace smash
         void drawPixel(int x, int y, uint16_t color) const override;
         void drawRect(int x, int y, int w, int h, uint16_t color) const override;
         void drawCanvas(const Canvas& _canvas) const override;
+
+        virtual size_t getCanvasWidth() const override;
+        virtual size_t getCanvasHeight() const override;
+        virtual void swapFrameBuffers() const override;
+
     };
 }
 
