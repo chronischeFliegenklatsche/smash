@@ -30,6 +30,7 @@
 #include "smash/ShaderProgram.hpp"
 #include "smash/ShaderAttributes.hpp"
 #include "smash/ShaderRenderer.hpp"
+#include "smash/Random.hpp"
 
 // For ESP32 platform
 #ifdef ESP32
