@@ -5,24 +5,22 @@
 
 namespace smash
 {
-    class Experimental_GlRgbMatrixAPI : public RenderingAPI
-    {
-        size_t m_PixelScalar;
-        GLRenderingAPI m_GlRenderer;
-    public:
+    class ScaledGLRenderingAPI : public GLRenderingAPI
+        {
+        private:
+            size_t m_PixelScalar;
 
-        Experimental_GlRgbMatrixAPI(size_t _pixelScalar);
-        virtual ~Experimental_GlRgbMatrixAPI() override;
+        public:
+            ScaledGLRenderingAPI(size_t pixelScalar);
+            ~ScaledGLRenderingAPI() override = default;
 
-        void drawPixel(int x, int y, uint16_t color) const override;
-        void drawRect(int x, int y, int w, int h, uint16_t color) const override;
-        void drawCanvas(const Canvas& _canvas) const override;
+            void drawPixel(int x, int y, uint16_t color) const override;
+            void drawRect(int x, int y, int w, int h, uint16_t color) const override;
+            void drawCanvas(const Canvas& _canvas) const override;
 
-        virtual size_t getCanvasWidth() const override;
-        virtual size_t getCanvasHeight() const override;
-        virtual void swapFrameBuffers() const override;
-
-    };
+            size_t getCanvasWidth() const override;
+            size_t getCanvasHeight() const override;
+        };
 }
 
 #endif

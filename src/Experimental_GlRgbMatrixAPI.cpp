@@ -2,42 +2,54 @@
 
 namespace smash
 {
-    Experimental_GlRgbMatrixAPI::Experimental_GlRgbMatrixAPI(size_t _pixelScalar) : m_PixelScalar(_pixelScalar), m_GlRenderer()
-    {
-    }
 
-    Experimental_GlRgbMatrixAPI::~Experimental_GlRgbMatrixAPI()
-    {
-    }
+ScaledGLRenderingAPI::ScaledGLRenderingAPI(size_t pixelScalar)
+    : GLRenderingAPI(), m_PixelScalar(pixelScalar)
+{
+    Diagnostics::print("ScaledGLRenderingAPI constructor called with scalar: " + std::to_string(m_PixelScalar));
+}
 
-    void Experimental_GlRgbMatrixAPI::drawPixel(int x, int y, uint16_t color) const
+void ScaledGLRenderingAPI::drawPixel(int x, int y, uint16_t color) const
+{
+    for (size_t dy = 0; dy < m_PixelScalar; ++dy)
     {
-        x *= m_PixelScalar;
-        y *= m_PixelScalar;
-        m_GlRenderer.drawRect(x, y, m_PixelScalar, m_PixelScalar, color);
-    }
-
-    void Experimental_GlRgbMatrixAPI::drawRect(int x, int y, int w, int h, uint16_t color) const
-    {
-        x *= m_PixelScalar;
-        y *= m_PixelScalar;
-        w *= m_PixelScalar;
-        h *= m_PixelScalar;
-        m_GlRenderer.drawRect(x, y, w, h, color);
-    }
-
-    void Experimental_GlRgbMatrixAPI::drawCanvas(const Canvas& _canvas) const
-    {
-        for (size_t y = 0; y < _canvas.getHeight(); y++)
+        for (size_t dx = 0; dx < m_PixelScalar; ++dx)
         {
-            for (size_t x = 0; x < _canvas.getWidth(); x++)
-            {
-                drawPixel(x, y, _canvas.getPixel(x, y).getRGB16());
-            }
+            GLRenderingAPI::drawPixel(x * m_PixelScalar + dx, y * m_PixelScalar + dy, color);
         }
     }
+}
 
-    size_t Experimental_GlRgbMatrixAPI::getCanvasWidth() const { return 64; }
-    size_t Experimental_GlRgbMatrixAPI::getCanvasHeight() const { return 32; }
-    void Experimental_GlRgbMatrixAPI::swapFrameBuffers() const { m_GlRenderer.swapFrameBuffers(); }
+void ScaledGLRenderingAPI::drawRect(int x, int y, int w, int h, uint16_t color) const
+{
+    for (int j = 0; j < h; ++j)
+    {
+        for (int i = 0; i < w; ++i)
+        {
+            drawPixel(x + i, y + j, color);
+        }
+    }
+}
+
+void ScaledGLRenderingAPI::drawCanvas(const Canvas& _canvas) const
+{
+    for (size_t y = 0; y < _canvas.getHeight(); ++y)
+    {
+        for (size_t x = 0; x < _canvas.getWidth(); ++x)
+        {
+            drawPixel(x, y, _canvas.getPixel(x, y).getRGB16());
+        }
+    }
+}
+
+size_t ScaledGLRenderingAPI::getCanvasWidth() const
+{
+    return GLRenderingAPI::getCanvasWidth() / m_PixelScalar;
+}
+
+size_t ScaledGLRenderingAPI::getCanvasHeight() const
+{
+    return GLRenderingAPI::getCanvasHeight() / m_PixelScalar;
+}
+
 }
