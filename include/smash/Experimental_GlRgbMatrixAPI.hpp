@@ -7,8 +7,8 @@ namespace smash
 {
     class Experimental_GlRgbMatrixAPI : public RenderingAPI
     {
-        GLRenderingAPI m_GlRenderer;
         size_t m_PixelScalar;
+        GLRenderingAPI m_GlRenderer;
     public:
 
         Experimental_GlRgbMatrixAPI(size_t _pixelScalar);
