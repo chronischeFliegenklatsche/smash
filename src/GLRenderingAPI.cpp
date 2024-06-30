@@ -137,14 +137,21 @@ void GLRenderingAPI::drawPixel(int x, int y, uint16_t color) const
 
 void GLRenderingAPI::drawRect(int x, int y, int w, int h, uint16_t color) const
 {
-    for (int j = 0; j < h; ++j)
-    {
-        for (int i = 0; i < w; ++i)
-        {
-            drawPixel(x + i, y + j, color);
-        }
-    }
-}
+    float x1 = (float)x / (float)getCanvasWidth() * 2.0f - 1.0f;
+    float y1 = 1.0f - (float)y / (float)getCanvasHeight() * 2.0f;
+    float x2 = (float)(x + w) / (float)getCanvasWidth() * 2.0f - 1.0f;
+    float y2 = 1.0f - (float)(y + h) / (float)getCanvasHeight() * 2.0f;
+
+    float r = ((color >> 11) & 0x1F) / 31.0f;
+    float g = ((color >> 5) & 0x3F) / 63.0f;
+    float b = (color & 0x1F) / 31.0f;
+
+    float vertices[] = {
+        x1, y1, r, g, b,
+        x2, y1, r, g, b,
+        x2, y2, r, g, b,
+        x1, y2, r, g, b
+    };
 
 void GLRenderingAPI::drawCanvas(const Canvas& _canvas) const
 {
