@@ -1,6 +1,8 @@
 #ifndef _COLOR_HPP
 #define _COLOR_HPP
 
+#include <stdint.h>
+
 namespace smash
 {
     struct Color;
