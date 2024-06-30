@@ -1,5 +1,6 @@
 
 #include <smash.h>
+#include <cmath>
 
 namespace smash
 {
