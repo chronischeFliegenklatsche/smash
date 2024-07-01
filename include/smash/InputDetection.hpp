@@ -13,13 +13,13 @@ namespace smash
 
     class InputDetector
     {
-        std::unique_ptr<const InputAPI> m_InputAPI;
+        std::unique_ptr<InputAPI> m_InputAPI;
     public:
 
         InputDetector();
-        virtual ~InputDetector();
+        ~InputDetector();
 
-        void bindInputAPI(std::unique_ptr<const InputAPI> inputAPI);
+        void bindInputAPI(std::unique_ptr<InputAPI> inputAPI);
 
         void updateInputs(InputSystem& inputSystem) const;
 
@@ -30,9 +30,11 @@ namespace smash
         static InputDetector m_InputDetector;
     public:
 
-        static void bindInputAPI(std::unique_ptr<const InputAPI> inputAPI);
+        static void bindInputAPI(std::unique_ptr<InputAPI> inputAPI);
 
         static void updateInputs();
+
+        static void shutdown();
     };
 
 }

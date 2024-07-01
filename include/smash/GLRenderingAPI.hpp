@@ -23,6 +23,7 @@ namespace smash
         size_t getCanvasHeight() const override;
 
         void swapFrameBuffers() const override;
+
     };
 }
 

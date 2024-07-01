@@ -7,7 +7,7 @@ namespace smash
 
     Renderer::Renderer() : m_RenderingAPI(nullptr) {}
 
-    void Renderer::bindRenderingAPI(std::unique_ptr<const RenderingAPI> renderingAPI)
+    void Renderer::bindRenderingAPI(std::unique_ptr<RenderingAPI> renderingAPI)
     {
         m_RenderingAPI = std::move(renderingAPI);
     }
@@ -26,7 +26,7 @@ namespace smash
         }
     }
 
-    void Rendering::bindRenderingAPI(std::unique_ptr<const RenderingAPI> renderingAPI)
+    void Rendering::bindRenderingAPI(std::unique_ptr<RenderingAPI> renderingAPI)
     {
         m_Renderer.bindRenderingAPI(std::move(renderingAPI));
     }
@@ -35,5 +35,18 @@ namespace smash
     void Rendering::render()
     {
         m_Renderer.render(SceneManagement::getActiveScene());
+    }
+
+    void Rendering::shutdown()
+    {
+        m_Renderer.~Renderer();
+    }
+
+    Renderer::~Renderer()
+    {
+        if (m_RenderingAPI)
+        {
+            m_RenderingAPI->~RenderingAPI();
+        }
     }
 }

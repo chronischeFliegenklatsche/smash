@@ -11,9 +11,13 @@ namespace smash
 
     InputDetector::~InputDetector()
     {
+        if (m_InputAPI)
+        {
+            m_InputAPI->~InputAPI();
+        }
     }
 
-    void InputDetector::bindInputAPI(std::unique_ptr<const InputAPI> inputAPI)
+    void InputDetector::bindInputAPI(std::unique_ptr<InputAPI> inputAPI)
     {
         m_InputAPI = std::move(inputAPI);
     }
@@ -27,7 +31,7 @@ namespace smash
         }
     }
 
-    void InputDetection::bindInputAPI(std::unique_ptr<const InputAPI> inputAPI)
+    void InputDetection::bindInputAPI(std::unique_ptr<InputAPI> inputAPI)
     {
         m_InputDetector.bindInputAPI(std::move(inputAPI));
     }
@@ -35,5 +39,10 @@ namespace smash
     void InputDetection::updateInputs()
     {
         m_InputDetector.updateInputs(Input::m_InputSystem);
+    }
+
+    void InputDetection::shutdown()
+    {
+        m_InputDetector.~InputDetector();
     }
 }
