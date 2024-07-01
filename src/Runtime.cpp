@@ -15,7 +15,6 @@ namespace smash
 
     void Runtime::pipe() const
     {
-        return;
         Time::registerFrameBegin();
         Application::s_CurrentRuntime = this;
         InputDetection::updateInputs();
