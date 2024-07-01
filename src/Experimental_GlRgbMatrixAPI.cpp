@@ -6,7 +6,6 @@ namespace smash
 Experimental_GlRgbMatrixAPI::Experimental_GlRgbMatrixAPI(size_t pixelScalar)
     : GLRenderingAPI(), m_PixelScalar(pixelScalar)
 {
-    Diagnostics::print("Experimental_GlRgbMatrixAPI constructor called with scalar: " + std::to_string(m_PixelScalar));
 }
 
 void Experimental_GlRgbMatrixAPI::drawPixel(int x, int y, uint16_t color) const

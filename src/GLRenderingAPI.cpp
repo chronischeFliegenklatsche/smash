@@ -7,12 +7,10 @@ namespace smash
 
 GLRenderingAPI::GLRenderingAPI() : RenderingAPI(), GLBaseAPI()
 {
-    Diagnostics::print("GLRenderingAPI constructor called");
 
     // Initialize OpenGL context and create shaders
     if (!glfwGetCurrentContext())
     {
-        Diagnostics::print("Error: No OpenGL context available");
         return;
     }
 
@@ -22,8 +20,6 @@ GLRenderingAPI::GLRenderingAPI() : RenderingAPI(), GLBaseAPI()
         Diagnostics::print("Failed to initialize GLAD");
         return;
     }
-
-    Diagnostics::print("OpenGL context is available");
 
     // Create and compile shaders
     const char* vertexShaderSource = R"(
@@ -59,7 +55,6 @@ GLRenderingAPI::GLRenderingAPI() : RenderingAPI(), GLBaseAPI()
     if (!success)
     {
         glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
-        Diagnostics::print("Vertex shader compilation failed: " + std::string(infoLog));
     }
 
     GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
@@ -71,7 +66,6 @@ GLRenderingAPI::GLRenderingAPI() : RenderingAPI(), GLBaseAPI()
     if (!success)
     {
         glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
-        Diagnostics::print("Fragment shader compilation failed: " + std::string(infoLog));
     }
 
     shaderProgram = glCreateProgram();
@@ -83,7 +77,6 @@ GLRenderingAPI::GLRenderingAPI() : RenderingAPI(), GLBaseAPI()
     glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
     if (!success) {
         glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
-        Diagnostics::print("Shader program linking failed: " + std::string(infoLog));
     }
 
     glDeleteShader(vertexShader);
@@ -104,12 +97,10 @@ GLRenderingAPI::GLRenderingAPI() : RenderingAPI(), GLBaseAPI()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    Diagnostics::print("GLRenderingAPI initialization completed");
 }
 
 GLRenderingAPI::~GLRenderingAPI()
 {
-    Diagnostics::print("GLRenderingAPI destructor called");
     glDeleteVertexArrays(1, &vao);
     glDeleteBuffers(1, &vbo);
     glDeleteProgram(shaderProgram);
@@ -192,10 +183,6 @@ void GLRenderingAPI::swapFrameBuffers() const
     {
         glfwSwapBuffers(window);
         glfwPollEvents();  // Process events to keep the window responsive
-    }
-    else
-    {
-        Diagnostics::print("Error: No GLFW window available for swapFrameBuffers");
     }
 }
 
