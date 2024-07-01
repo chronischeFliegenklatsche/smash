@@ -54,6 +54,14 @@ namespace smash
         }
     }
 
+    void SceneManager::setActiveScene(size_t index)
+    {
+        if (index < m_Scenes.size())
+        {
+            m_ActiveScene = m_Scenes[index].get();
+        }
+    }
+
     Scene* SceneManager::getActiveScene()
     {
         return m_ActiveScene;
@@ -103,6 +111,11 @@ namespace smash
     void SceneManagement::setActiveScene(const Scene& scene)
     {
         s_SceneManager.setActiveScene(scene);
+    }
+
+    void SceneManagement::setActiveScene(size_t index)
+    {
+        s_SceneManager.setActiveScene(index);
     }
 
     Scene* SceneManagement::getActiveScene()
