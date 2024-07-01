@@ -7,7 +7,6 @@ namespace smash
 
     API::~API()
     {
-        Diagnostics::print("MAKE API SHUTDOWN");
         shutdown();
     }
 }
