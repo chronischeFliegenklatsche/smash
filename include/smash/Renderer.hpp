@@ -29,6 +29,7 @@ namespace smash
     public:
 
         static void bindRenderingAPI(std::unique_ptr<const RenderingAPI> renderingAPI);
+        
 
         static void render();
     };

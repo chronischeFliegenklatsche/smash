@@ -3,11 +3,12 @@
 
 #include <memory>
 #include "InputSystem.hpp"
+#include "API.hpp"
 
 namespace smash
 {
     class InputAPI;
-    class InputAPI
+    class InputAPI : public API
     {
     protected:
         void setAxis(InputSystem& inputSystem, const std::string& axis, float value) const;

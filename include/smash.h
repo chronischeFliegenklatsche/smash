@@ -32,6 +32,7 @@
 #include "smash/ShaderRenderer.hpp"
 #include "smash/Random.hpp"
 #include "smash/Experimental_GlRgbMatrixAPI.hpp"
+#include "smash/API.hpp"
 
 // For ESP32 platform
 #ifdef ESP32

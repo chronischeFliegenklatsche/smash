@@ -4,13 +4,14 @@
 #include <stdint.h>
 
 #include "Canvas.hpp"
+#include "API.hpp"
 
 namespace smash
 {
 
     class RenderingAPI;
 
-    class RenderingAPI
+    class RenderingAPI : public API
     {
     public:
 
