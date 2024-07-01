@@ -24,8 +24,8 @@ namespace smash
     }
 
     void Runtime::queueRuntimeExit() const {
-        InputDetection::shutdown();
-        Rendering::shutdown();
+        //InputDetection::shutdown();
+        //Rendering::shutdown();
         m_RuntimeExitQueued = true;
     }
 
