@@ -18,7 +18,7 @@ namespace smash
         Time::registerFrameBegin();
         Application::s_CurrentRuntime = this;
         InputDetection::updateInputs();
-        SceneManagement::updateActiveScene();
+        //SceneManagement::updateActiveScene();
         //Rendering::render();
         Time::updateDeltaTime();
     }
