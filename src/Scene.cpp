@@ -13,28 +13,28 @@ namespace smash
     {
         _gameObjects.push_back(gameObject);
         
-        for (auto& component : gameObject.get()->_components)
+        for (auto& component : gameObject.get()->m_Components)
         {
-            _components.addComponent(*component);
+            m_Components.addComponent(*component);
         }
         
-        gameObject.get()->_scene = this;
+        gameObject.get()->m_Scene = this;
     }
 
-    bool Scene::destroy(std::shared_ptr<GameObject> gameObject)
+    bool Scene::destroy(std::weak_ptr<GameObject> gameObject)
     {
         for (auto itr = _gameObjects.begin(); itr != _gameObjects.end(); ++itr)
         {
-            if (*itr == gameObject)
+            if (auto gm = gameObject.lock(); *itr == gm)
             {
                 _gameObjects.erase(itr);
 
-                for (auto& component : gameObject.get()->_components)
+                for (auto& component : gm->m_Components)
                 {
-                    _components.removeComponent(*component);
+                    m_Components.removeComponent(*component);
                 }
 
-                gameObject.get()->_scene = nullptr;
+                gm->m_Scene = nullptr;
                 return true;
             }
         }
@@ -43,7 +43,7 @@ namespace smash
 
     void Scene::update()
     {
-        for (Component& component : _components)
+        for (Component& component : m_Components)
         {
             component.update();
         }

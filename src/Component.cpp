@@ -20,4 +20,7 @@ namespace smash
 
     void Component::render(const RenderingAPI& _renderingAPI) const
     {}
+
+    void Component::update()
+    {}
 }

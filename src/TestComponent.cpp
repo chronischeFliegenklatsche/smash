@@ -18,9 +18,9 @@ namespace smash
         Diagnostics::print("Updated TestComponent instance.");
     }
 
-    Component* TestComponent::clone() const
+    std::unique_ptr<Component> TestComponent::clone() const
     {
-        return new TestComponent();
+        return std::make_unique<TestComponent>();
     }
 
     std::string TestComponent::getTypeName() const

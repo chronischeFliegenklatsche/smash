@@ -5,14 +5,14 @@
 
 namespace smash
 {
-    class ScaledGLRenderingAPI : public GLRenderingAPI
+    class Experimental_GlRgbMatrixAPI : public GLRenderingAPI
         {
         private:
             size_t m_PixelScalar;
 
         public:
-            ScaledGLRenderingAPI(size_t pixelScalar);
-            ~ScaledGLRenderingAPI() override = default;
+            Experimental_GlRgbMatrixAPI(size_t pixelScalar);
+            ~Experimental_GlRgbMatrixAPI() override = default;
 
             void drawPixel(int x, int y, uint16_t color) const override;
             void drawRect(int x, int y, int w, int h, uint16_t color) const override;

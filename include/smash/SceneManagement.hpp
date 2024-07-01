@@ -26,7 +26,8 @@ namespace smash
 
         size_t getScenesCount() const;
 
-        void setActiveScene(const Scene* scene);
+        void setActiveScene(const Scene& scene);
+        void setActiveScene(size_t index);
 
         Scene* getActiveScene();
         const Scene* getActiveScene() const;
@@ -49,7 +50,8 @@ namespace smash
     
             static size_t getScenesCount();
     
-            static void setActiveScene(const Scene* scene);
+            static void setActiveScene(const Scene& scene);
+            static void setActiveScene(size_t index);
     
             static Scene* getActiveScene();
     

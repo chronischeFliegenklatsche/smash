@@ -14,7 +14,7 @@ namespace smash
     {
         friend class Renderer;
         friend class GameObject;
-        ComponentsContainer _components;
+        ComponentsContainer m_Components;
         std::vector<std::shared_ptr<GameObject>> _gameObjects;
     public:
     
@@ -22,7 +22,7 @@ namespace smash
         virtual ~Scene();
 
         void instantiate(std::shared_ptr<GameObject> gameObject);   
-        bool destroy(std::shared_ptr<GameObject> gameObject);
+        bool destroy(std::weak_ptr<GameObject> gameObject);
         
         virtual void update();
 

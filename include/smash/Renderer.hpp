@@ -13,13 +13,12 @@ namespace smash
 
     class Renderer
     {
-        std::shared_ptr<const RenderingAPI> m_RenderingAPI;
+        std::unique_ptr<const RenderingAPI> m_RenderingAPI;
     public:
 
         Renderer();
 
-        void setRenderingAPI(std::shared_ptr<const RenderingAPI> renderingAPI);
-        std::shared_ptr<const RenderingAPI> getRenderingAPI() const;
+        void bindRenderingAPI(std::unique_ptr<const RenderingAPI> renderingAPI);
 
         void render(const Scene* _scene) const;
     };
@@ -29,9 +28,7 @@ namespace smash
         static Renderer m_Renderer;
     public:
 
-        static void setRenderingAPI(std::shared_ptr<const RenderingAPI> renderingAPI);
-
-        static std::shared_ptr<const RenderingAPI> getRenderingAPI();
+        static void bindRenderingAPI(std::unique_ptr<const RenderingAPI> renderingAPI);
 
         static void render();
     };

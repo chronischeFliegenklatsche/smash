@@ -14,8 +14,8 @@ namespace smash
     class GameObject
     {
         friend class Scene;
-        Scene *_scene;
-        std::vector<std::shared_ptr<Component>> _components;
+        Scene *m_Scene;
+        std::vector<std::shared_ptr<Component>> m_Components;
     public:
 
         GameObject();
@@ -24,18 +24,18 @@ namespace smash
         Scene* getScene() const;
 
         void addComponent(std::shared_ptr<Component> component);
-        bool removeComponent(std::shared_ptr<Component> component);
+        bool removeComponent(std::weak_ptr<Component> component);
 
 #ifdef _WIN32
         template<typename T>
-        std::shared_ptr<T> getComponent();
+        std::weak_ptr<T> getComponent();
 
         template<typename T>
-        const std::shared_ptr<T> getComponent() const;
+        const std::weak_ptr<T> getComponent() const;
 #endif
 
-    std::shared_ptr<Component> getComponent(const std::string& typeName);
-    std::shared_ptr<const Component> getComponent(const std::string& typeName) const;
+    std::weak_ptr<Component> getComponent(const std::string& typeName);
+    std::weak_ptr<const Component> getComponent(const std::string& typeName) const;
 
     };
 }

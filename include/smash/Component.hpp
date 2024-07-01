@@ -4,6 +4,7 @@
 #include "GameObject.hpp"
 #include "TypeNameProvider.hpp"
 #include "RenderingAPI.hpp"
+#include <memory>
 
 namespace smash
 {
@@ -18,12 +19,15 @@ namespace smash
     public:
         Component();
         Component(int updateIndex);
+
         GameObject* getGameObject() const;
         virtual ~Component();
-        virtual Component* clone() const = 0;
-        virtual void update() = 0;
-        virtual void render(const RenderingAPI& _renderingAPI) const;
+
         virtual std::string getTypeName() const = 0;
+        virtual std::unique_ptr<Component> clone() const = 0;
+
+        virtual void update();
+        virtual void render(const RenderingAPI& _renderingAPI) const;
     };
 }
 

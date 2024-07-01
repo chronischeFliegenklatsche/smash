@@ -46,11 +46,8 @@ namespace smash {
         return m_Scale;
     }
 
-    Component* Transform::clone() const {
-        Transform *clone = new Transform();
-        clone->m_Position = m_Position;
-        clone->m_Scale = m_Scale;
-        return clone;
+    std::unique_ptr<Component> Transform::clone() const {
+        return std::make_unique<Transform>(m_Position, m_Scale);
     }
 
     void Transform::update()

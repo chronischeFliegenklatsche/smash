@@ -1,22 +1,18 @@
 #include <smash.h>
+#include <memory>
 
 namespace smash
 {
 
-    Component* ShaderRenderer::clone() const
+    std::unique_ptr<Component> ShaderRenderer::clone() const
     {
-        return new ShaderRenderer();
-    }
-
-    void ShaderRenderer::update()
-    {
-        // Do nothing
+        return std::make_unique<ShaderRenderer>();
     }
 
     void ShaderRenderer::render(const RenderingAPI& _renderingAPI) const
     {
         
-        m_ShaderProgram.use(*m_StartFrameShaderAttributes, _renderingAPI);
+        m_ShaderProgram.use(*m_ShaderAttributes, _renderingAPI);
 
     }
 
@@ -25,9 +21,9 @@ namespace smash
         return "ShaderRenderer";
     }
 
-    void ShaderRenderer::bindStartFrameShaderAttributes(std::unique_ptr<ShaderAttributes> _shaderAttributes)
+    void ShaderRenderer::bindShaderAttributes(std::unique_ptr<ShaderAttributes> _shaderAttributes)
     {
-        m_StartFrameShaderAttributes = std::move(_shaderAttributes);
+        m_ShaderAttributes = std::move(_shaderAttributes);
     }
 
 }

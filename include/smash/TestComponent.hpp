@@ -13,7 +13,7 @@ namespace smash
         ~TestComponent();
 
         virtual void update() override;
-        Component* clone() const override;
+        std::unique_ptr<Component> clone() const override;
         std::string getTypeName() const override;
         
     };

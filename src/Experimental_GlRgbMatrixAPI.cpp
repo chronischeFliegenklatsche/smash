@@ -3,13 +3,13 @@
 namespace smash
 {
 
-ScaledGLRenderingAPI::ScaledGLRenderingAPI(size_t pixelScalar)
+Experimental_GlRgbMatrixAPI::Experimental_GlRgbMatrixAPI(size_t pixelScalar)
     : GLRenderingAPI(), m_PixelScalar(pixelScalar)
 {
-    Diagnostics::print("ScaledGLRenderingAPI constructor called with scalar: " + std::to_string(m_PixelScalar));
+    Diagnostics::print("Experimental_GlRgbMatrixAPI constructor called with scalar: " + std::to_string(m_PixelScalar));
 }
 
-void ScaledGLRenderingAPI::drawPixel(int x, int y, uint16_t color) const
+void Experimental_GlRgbMatrixAPI::drawPixel(int x, int y, uint16_t color) const
 {
     for (size_t dy = 0; dy < m_PixelScalar; ++dy)
     {
@@ -20,7 +20,7 @@ void ScaledGLRenderingAPI::drawPixel(int x, int y, uint16_t color) const
     }
 }
 
-void ScaledGLRenderingAPI::drawRect(int x, int y, int w, int h, uint16_t color) const
+void Experimental_GlRgbMatrixAPI::drawRect(int x, int y, int w, int h, uint16_t color) const
 {
     for (int j = 0; j < h; ++j)
     {
@@ -31,7 +31,7 @@ void ScaledGLRenderingAPI::drawRect(int x, int y, int w, int h, uint16_t color) 
     }
 }
 
-void ScaledGLRenderingAPI::drawCanvas(const Canvas& _canvas) const
+void Experimental_GlRgbMatrixAPI::drawCanvas(const Canvas& _canvas) const
 {
     for (size_t y = 0; y < _canvas.getHeight(); ++y)
     {
@@ -42,12 +42,12 @@ void ScaledGLRenderingAPI::drawCanvas(const Canvas& _canvas) const
     }
 }
 
-size_t ScaledGLRenderingAPI::getCanvasWidth() const
+size_t Experimental_GlRgbMatrixAPI::getCanvasWidth() const
 {
     return GLRenderingAPI::getCanvasWidth() / m_PixelScalar;
 }
 
-size_t ScaledGLRenderingAPI::getCanvasHeight() const
+size_t Experimental_GlRgbMatrixAPI::getCanvasHeight() const
 {
     return GLRenderingAPI::getCanvasHeight() / m_PixelScalar;
 }

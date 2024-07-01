@@ -13,14 +13,9 @@ namespace smash
     {
     }
 
-    void InputDetector::setInputAPI(std::shared_ptr<const InputAPI> inputAPI)
+    void InputDetector::bindInputAPI(std::unique_ptr<const InputAPI> inputAPI)
     {
-        m_InputAPI = inputAPI;
-    }
-
-    std::shared_ptr<const InputAPI> InputDetector::getInputAPI() const
-    {
-        return m_InputAPI;
+        m_InputAPI = std::move(inputAPI);
     }
 
     void InputDetector::updateInputs(InputSystem& inputSystem) const
@@ -32,14 +27,9 @@ namespace smash
         }
     }
 
-    void InputDetection::setInputAPI(std::shared_ptr<const InputAPI> inputAPI)
+    void InputDetection::bindInputAPI(std::unique_ptr<const InputAPI> inputAPI)
     {
-        m_InputDetector.setInputAPI(inputAPI);
-    }
-
-    std::shared_ptr<const InputAPI> InputDetection::getInputAPI()
-    {
-        return m_InputDetector.getInputAPI();
+        m_InputDetector.bindInputAPI(std::move(inputAPI));
     }
 
     void InputDetection::updateInputs()

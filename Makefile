@@ -4,7 +4,7 @@ CXX = g++
 
 # Compiler flags
 CFLAGS = -Wall -fPIC -Iinclude
-CXXFLAGS := $(CFLAGS)
+CXXFLAGS := $(CFLAGS) -std=c++17
 LDFLAGS = -lopengl32 -lgdi32
 
 # Input directories

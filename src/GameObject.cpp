@@ -3,7 +3,7 @@
 
 namespace smash
 {
-    GameObject::GameObject() : _scene(nullptr), _components()
+    GameObject::GameObject() : m_Scene(), m_Components()
     {}
 
     GameObject::~GameObject()
@@ -11,26 +11,26 @@ namespace smash
  
     void GameObject::addComponent(std::shared_ptr<Component> component)
     {
-        _components.push_back(component);
+        m_Components.push_back(component);
         component->_gameObject = this;
         
-        if (_scene != nullptr)
+        if (m_Scene)
         {
-            _scene->_components.addComponent(*component);
+            m_Scene->m_Components.addComponent(*component);
         }
     }
 
-    bool GameObject::removeComponent(std::shared_ptr<Component> component)
+    bool GameObject::removeComponent(std::weak_ptr<Component> component)
     {
-        for (auto itr = _components.begin(); itr != _components.end(); ++itr)
+        for (auto itr = m_Components.begin(); itr != m_Components.end(); ++itr)
         {
-            if (*itr == component)
+            if (auto c = component.lock(); c == *itr)
             {
-                _components.erase(itr);
-                component.get()->_gameObject = nullptr;
+                m_Components.erase(itr);
+                c.get()->_gameObject = nullptr;
 
-                if (_scene != nullptr)
-                    _scene->_components.removeComponent(*component);
+                if (m_Scene)
+                    m_Scene->m_Components.removeComponent(*c);
 
                 return true;
             }
@@ -40,9 +40,9 @@ namespace smash
 
 #ifdef _WIN32
     template<typename T>
-    std::shared_ptr<T> GameObject::getComponent()
+    std::weak_ptr<T> GameObject::getComponent()
     {
-        for (auto& component : _components)
+        for (auto& component : m_Components)
         {
             T* typeComponent = dynamic_cast<T*>(component.get());
             if (typeComponent)
@@ -50,15 +50,15 @@ namespace smash
                 return std::dynamic_pointer_cast<T>(component);
             }
         }
-        return nullptr;
+        return std::weak_ptr<T>();
     }
 
 
 
     template<typename T>
-    const std::shared_ptr<T> GameObject::getComponent() const
+    const std::weak_ptr<T> GameObject::getComponent() const
     {
-        for (auto& component : _components)
+        for (auto& component : m_Components)
         {
             T* typeComponent = dynamic_cast<T*>(component.get());
             if (typeComponent)
@@ -66,41 +66,41 @@ namespace smash
                 return std::dynamic_pointer_cast<T>(component);
             }
         }
-        return nullptr;
+        return std::weak_ptr<T>();
     }
 
     // implement the get Scene function
     Scene* GameObject::getScene() const
     {
-        return _scene;
+        return m_Scene;
     }
     
-    template std::shared_ptr<Transform> GameObject::getComponent<Transform>();
-    template const std::shared_ptr<Transform> GameObject::getComponent<Transform>() const;
+    template std::weak_ptr<Transform> GameObject::getComponent<Transform>();
+    template const std::weak_ptr<Transform> GameObject::getComponent<Transform>() const;
 
 #endif
 
-    std::shared_ptr<Component> GameObject::getComponent(const std::string& typeName)
+    std::weak_ptr<Component> GameObject::getComponent(const std::string& typeName)
     {
-        for (auto& component : _components)
+        for (auto& component : m_Components)
         {
             if (component->getTypeName() == typeName)
             {
                 return component;
             }
         }
-        return nullptr;
+        return std::weak_ptr<Component>();
     }
 
-    std::shared_ptr<const Component> GameObject::getComponent(const std::string& typeName) const
+    std::weak_ptr<const Component> GameObject::getComponent(const std::string& typeName) const
     {
-        for (auto& component : _components)
+        for (auto& component : m_Components)
         {
             if (component->getTypeName() == typeName)
             {
                 return component;
             }
         }
-        return nullptr;
+        return std::weak_ptr<const Component>();
     }
 }

@@ -30,7 +30,7 @@ namespace smash
         Vector2 getScale() const;
         Vector2& getScaleRef();
 
-        Component* clone() const override;
+        std::unique_ptr<Component> clone() const override;
         void update() override;
 
         std::string getTypeName() const override;

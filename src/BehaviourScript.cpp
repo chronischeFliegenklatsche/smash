@@ -13,22 +13,36 @@ namespace smash {
     }
 
     void BehaviourScript::addComponent(std::shared_ptr<Component> component) const {
-        getGameObject()->addComponent(component);
+        if (getGameObject())
+        {
+            getGameObject()->addComponent(component);
+        }
     }
 
-    bool BehaviourScript::removeComponent(std::shared_ptr<Component> component) const {
-        return getGameObject()->removeComponent(component);
+    bool BehaviourScript::removeComponent(std::weak_ptr<Component> component) const {
+        if (getGameObject())
+        {
+            return getGameObject()->removeComponent(component);
+        }
+        return false;
     }
 
     void BehaviourScript::instantiate(std::shared_ptr<GameObject> gameObject) const {
-        getGameObject()->getScene()->instantiate(gameObject);
+        if (getGameObject() && getGameObject()->getScene())
+        {
+            getGameObject()->getScene()->instantiate(gameObject);
+        }
     }
 
     bool BehaviourScript::destroy(std::shared_ptr<GameObject> gameObject) const {
-        return getGameObject()->getScene()->destroy(gameObject);
+        if (getGameObject() && getGameObject()->getScene())
+        {
+            return getGameObject()->getScene()->destroy(gameObject);
+        }
+        return false;
     }
 
-    void BehaviourScript::setActiveScene(const Scene* scene) const {
+    void BehaviourScript::setActiveScene(const Scene& scene) const {
         SceneManagement::setActiveScene(scene);
     }
 
@@ -36,7 +50,11 @@ namespace smash {
         return SceneManagement::getActiveScene();
     }
 
-    std::shared_ptr<Component> BehaviourScript::getComponent(const std::string& typeName) {
-        return getGameObject()->getComponent(typeName);
+    std::weak_ptr<Component> BehaviourScript::getComponent(const std::string& typeName) {
+        if (getGameObject())
+        {
+            return getGameObject()->getComponent(typeName).lock();
+        }
+        return std::weak_ptr<Component>();
     }
 }

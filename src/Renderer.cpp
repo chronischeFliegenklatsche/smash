@@ -7,14 +7,9 @@ namespace smash
 
     Renderer::Renderer() : m_RenderingAPI(nullptr) {}
 
-    void Renderer::setRenderingAPI(std::shared_ptr<const RenderingAPI> renderingAPI)
+    void Renderer::bindRenderingAPI(std::unique_ptr<const RenderingAPI> renderingAPI)
     {
-        m_RenderingAPI = renderingAPI;
-    }
-
-    std::shared_ptr<const RenderingAPI> Renderer::getRenderingAPI() const
-    {
-        return m_RenderingAPI;
+        m_RenderingAPI = std::move(renderingAPI);
     }
 
     void Renderer::render(const Scene* _scene) const
@@ -22,7 +17,7 @@ namespace smash
         
         if (m_RenderingAPI && _scene)
         {
-            for (const Component& component : _scene->_components)
+            for (const Component& component : _scene->m_Components)
             {
                 component.render(*m_RenderingAPI);
                 
@@ -31,15 +26,11 @@ namespace smash
         }
     }
 
-    void Rendering::setRenderingAPI(std::shared_ptr<const RenderingAPI> renderingAPI)
+    void Rendering::bindRenderingAPI(std::unique_ptr<const RenderingAPI> renderingAPI)
     {
-        m_Renderer.setRenderingAPI(renderingAPI);
+        m_Renderer.bindRenderingAPI(std::move(renderingAPI));
     }
 
-    std::shared_ptr<const RenderingAPI> Rendering::getRenderingAPI()
-    {
-        return m_Renderer.getRenderingAPI();
-    }
 
     void Rendering::render()
     {
