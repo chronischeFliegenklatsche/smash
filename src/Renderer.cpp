@@ -17,7 +17,6 @@ namespace smash
         
         if (m_RenderingAPI && _scene)
         {
-            Diagnostics::print("ACTUALLY RENDERING");
             for (const Component& component : _scene->m_Components)
             {
                 component.render(*m_RenderingAPI);
